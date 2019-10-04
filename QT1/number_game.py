@@ -41,13 +41,19 @@ class Example(QWidget):
         self.LCD_step.display(self.step)
 
         self.LCD_x = QLCDNumber(self)
-        self.LCD_x.move(70, 80)
-        self.LCD_x.resize(160, 80)
+        self.LCD_x.move(70, 90)
+        self.LCD_x.resize(160, 90)
         self.LCD_x.display(self.x)
 
-        self.label = QLabel(self)
-        self.label.setText(f'Осталось ходов {self.step}')
-        self.label.move(80, 50)
+    # def initUI_end(self):
+    #     self.label = QLabel(self)
+    #     self.label.setText(f'Ходы закончились, нажмите любую кнопку для того,\n'
+    #                        f' что бы начать заново')
+    #     self.label.move(5, 60)
+
+        # self.label = QLabel(self)
+        # self.label.setText(f'Осталось ходов {self.step}')
+        # self.label.move(80, 50)
 
 
     def plus(self):
@@ -62,6 +68,11 @@ class Example(QWidget):
         self.LCD_x.display(self.x)
 
     def count(self):
+        if self.step == 0:
+            self.label_er.setText(f'Ходы закончились, нажмите любую кнопку для того,\n '
+                                  f'что бы начать заново')
+            self.step = 11
+            self.x = round(random.uniform(0, 100), 2)
         self.step -= 1
         self.label.setText(f'Осталось ходов {self.step}')
         self.LCD_step.display(self.step)
