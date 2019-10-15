@@ -9,7 +9,8 @@ def f_len(x):
 
 scena = []
 word = 'далеки'
-words = list(map(f_len, input().split()))
+words = list(map(f_len, map(str.strip, sys.stdin)))
+print(words)
 print(len(scena))
 # for line in words:
 #     print(line[0:6:])
