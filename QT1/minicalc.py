@@ -49,8 +49,8 @@ class Example(QWidget):
         self.label_error.resize(270, 20)
 
     def hello(self):
-        chislo = int(self.chislo_input.text())
-        chislo2 = int(self.chislo2_input.text())
+        chislo = float(self.chislo_input.text())
+        chislo2 = float(self.chislo2_input.text())
         print(chislo)
         if chislo2 == 0:
             self.label_error.setText("На 0 делить нельзя. Измените 2 число.")
