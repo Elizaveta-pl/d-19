@@ -1,10 +1,6 @@
 def reverse():
     f_w = open("output.dat", 'wb')
-    for i in list(open("input.dat", mode='rb')):
-        i = i[:-1]
-        g = i[::-1]
-        f_w.write(g)
-    f_w.close()
+    f_w.write(open("input.dat", mode='rb')[::-1])
 
 
 reverse()

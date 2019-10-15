@@ -10,11 +10,10 @@ class Example(QWidget):
         self.initUI()
 
     def random_number(self):
-        self.x = round(random.uniform(0, 100), 2)
-        self.y = round(random.uniform(0, 100), 2)
-        self.z = round(random.uniform(0, 100), 2)
+        self.x = round(random.randint(0, 100), 2)
+        self.y = round(random.randint(0, 100), 2)
+        self.z = round(random.randint(0, 100), 2)
         self.step = 10
-        print(self.x, self.y, self.z)
 
     def initUI(self):
         self.random_number()
@@ -30,10 +29,6 @@ class Example(QWidget):
         self.btn.resize(self.btn.sizeHint())
         self.btn.move(150, 210)
         self.btn.clicked.connect(self.minus)
-
-        # self.new = QPushButton('Начать заново', self)
-        # self.new.clicked.connect(self.restart)
-        # self.new.move(100, 240)
 
         self.label = QLabel(self)
         self.label.setText("Осталось ходов")
@@ -57,9 +52,6 @@ class Example(QWidget):
         self.label_er1 = QLabel(self)
         self.label_er1.setText(f'                                                                 ')
         self.label_er1.move(5, 70)
-        # self.label = QLabel(self)
-        # self.label.setText(f'Осталось ходов {self.step}')
-        # self.label.move(80, 50)
 
     def plus(self):
         self.x = self.x + self.y
@@ -78,9 +70,6 @@ class Example(QWidget):
         self.count()
         self.LCD_x.display(self.x)
 
-    # def restart(self):
-    #     random_number()
-
     def count(self):
         if self.x == 0:
             self.label_er.setText(f'Поздравляю, вы победили!')
@@ -89,7 +78,7 @@ class Example(QWidget):
                 self.label_er.setText(f'Ходы закончились, нажмите кнопку для того,\n')
                 self.label_er1.setText(f'что бы начать заново.')
                 self.LCD_step.display(0)
-                self.x = round(random.uniform(0, 100), 2)
+                self.x = round(random.randint(0, 100), 2)
                 self.random_number()
 
             else:
