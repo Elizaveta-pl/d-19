@@ -15,6 +15,8 @@ for line in words:
     print(line[0:6:])
 
 
+
+
 # words = sys.stdin
 # # words = list(map(str.strip, sys.stdin))
 # print(words)
