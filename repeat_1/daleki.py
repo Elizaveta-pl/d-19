@@ -1,20 +1,18 @@
 import sys
 
 def f_len(x):
-    if len(x)==len(word):
-        if x == word:
-            return x
-        else:
-            pass
+    x = x.replace('"', '')
+    x = x.replace('(', '')
+    if x[0:6:].lower() == word:
+         scena.append(x)
 
 
+scena = []
 word = 'далеки'
 words = list(map(f_len, input().split()))
-print(words)
-for line in words:
-    print(line[0:6:])
-
-
+print(len(scena))
+# for line in words:
+#     print(line[0:6:])
 
 
 # words = sys.stdin
