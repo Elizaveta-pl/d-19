@@ -22,19 +22,31 @@ class Widget(QMainWindow):
     def fill(self):
         self.table_widget.clear()
 
-        labels = ['ID', 'NAME', 'PRICE']
+        labels = ['ID', 'NAME', 'PRICE', 'PRICE1']
 
         self.table_widget.setColumnCount(len(labels))
         self.table_widget.setHorizontalHeaderLabels(labels)
+        # con = sqlite3.connect("baza.db")
+        #
+        # # Создание курсора
+        # cur = con.cursor()
+        #
+        # # Выполнение запроса и получение всех результатов
+        # #result = cur.execute("""SELECT * FROM Dohodi""").fetchall()
+        # result = cur.execute("""SELECT summa, whre, data, year FROM Dohodi""").fetchall()
+        # # Вывод результатов на экран
+        # for elem in result:
+        #     print(elem)
 
-        with sqlite3.connect('games.sqlite') as connect:
-            for id_, name, price in connect.execute("SELECT id, name, price FROM Game WHERE kind = 'Finished'"):
+        with sqlite3.connect("baza.db") as connect:
+            for summa, whre, data, year in connect.execute("""SELECT * FROM Dohodi"""):
                 row = self.table_widget.rowCount()
                 self.table_widget.setRowCount(row + 1)
-                self.table_widget.setItem(row, 0, QTableWidgetItem(str(id_)))
-                self.table_widget.setItem(row, 1, QTableWidgetItem(name))
-                self.table_widget.setItem(row, 2, QTableWidgetItem(price))
-
+                self.table_widget.setItem(row, 0, QTableWidgetItem(str(summa)))
+                self.table_widget.setItem(row, 1, QTableWidgetItem(whre))
+                self.table_widget.setItem(row, 2, QTableWidgetItem(str(data)))
+                self.table_widget.setItem(row, 3, QTableWidgetItem(str(year)))
+                print(summa)
 if __name__ == '__main__':
     app = QApplication([])
 
