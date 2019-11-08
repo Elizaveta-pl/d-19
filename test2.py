@@ -38,6 +38,22 @@ class Widget(QMainWindow):
         # for elem in result:
         #     print(elem)
 
+        # for tup in data:
+        #     col = 0
+        #
+        #     for item in tup:
+        #         cellinfo = QTableWidgetItem(item)
+        #
+        #         # Только для чтения
+        #         cellinfo.setFlags(
+        #             QtCore.Qt.ItemIsSelectable | QtCore.Qt.ItemIsEnabled
+        #         )
+        #
+        #         self.ui.tableWidget.setItem(row, col, cellinfo)
+        #         col += 1
+        #
+        #     row += 1
+
         with sqlite3.connect("baza.db") as connect:
             for summa, whre, data, year in connect.execute("""SELECT * FROM Dohodi"""):
                 row = self.table_widget.rowCount()
