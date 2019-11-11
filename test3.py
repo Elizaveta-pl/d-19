@@ -289,7 +289,7 @@ class Window(QtWidgets):  # Класс Window  наследует класс QWi
 
 # КОНЕЦ
 if __name__ == "__main__":
-    app = QtWidgets.QApplication(sys.argv)
+    app = QApplication(sys.argv)
     window = Window()  # создаёт экземпляр окна из класса
     window.move(40, 20)  # сдвиг окна от верхнего левого угла экрана
     pal = window.palette()
