@@ -30,9 +30,11 @@ class Example(QWidget):
         # self.centerLyt.addWidget(label)
 
         self.cheez_burger = QCheckBox("Чизбургер", self)
+        self.cheez_burger.setObjectName('Чизбургер')
         self.cheez_burger.move(20, 20)
 
-        self.gamburger = QCheckBox("Гамбургер", self)
+        self.gamburger = QCheckBox("Гамбургер1", self)
+        self.gamburger.setObjectName('Гамбургер')
         self.gamburger.move(20, 50)
 
         self.fri = QCheckBox("Картофель Фри", self)
@@ -56,16 +58,21 @@ class Example(QWidget):
         _translate = QtCore.QCoreApplication.translate
         Dialog.setWindowTitle(_translate("Dialog", "Макдоналдс"))
         self.btn.setText(_translate("Dialog", "Заказать"))
+        self.gamburger.setText(_translate("Dialog", "Гамбургер"))
 
 
     def check(self):
         if self.cheez_burger.isChecked():
             text = self.cheez_burger.text()
             print(f'text = {text}')
-            self.check.setPlainText(text)
+            # self.check.setPlainText(text)
 
         for button in self.findChildren(QCheckBox):
+            if button.isChecked():
+                self.check.setPlainText(button.objectName())
+            print(button.isChecked())
             print(button)
+            print(button.objectName())
             # button.clicked.connect(_on_button_clicked)
         # chislo = int(self.chislo_input.text())
         # chislo2 = int(self.chislo2_input.text())

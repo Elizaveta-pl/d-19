@@ -82,12 +82,29 @@
     </rect>
    </property>
   </widget>
+  <widget class="QCheckBox" name="Gamburger">
+   <property name="geometry">
+    <rect>
+     <x>90</x>
+     <y>50</y>
+     <width>92</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Гамбургер</string>
+   </property>
+   <property name="checked">
+    <bool>false</bool>
+   </property>
+  </widget>
   <zorder>listViewGrapth</zorder>
   <zorder>pushBuild</zorder>
   <zorder>lineGrapth</zorder>
   <zorder>label</zorder>
   <zorder>listWidgetGrapth</zorder>
   <zorder>check</zorder>
+  <zorder>Gamburger</zorder>
  </widget>
  <resources/>
  <connections/>
