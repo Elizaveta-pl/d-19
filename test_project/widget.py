@@ -10,8 +10,8 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from time import time
 
-from test_project.rashod import Rashod
-from test_project.edit import Edit
+from rashod import Rashod
+from edit import Edit
 
 
 columnName = ["Первый", "Второй", "Третий", "Четвёртый"] # заголовки табл
@@ -193,8 +193,8 @@ class Ui_Dialog(object):
         # # self.db_in_tabl()
 
         with sqlite3.connect("baza.db") as connect:
-            for  summa, operacia, day, month, year, transact, slag in connect.execute(
-                    f"""SELECT * FROM Dohodi where transact=0 ORDER BY slot"""):
+            for  id, summa, operacia, day, month, year, transact, slag in connect.execute(
+                    f"""SELECT * FROM Dohodi where transact=0 ORDER BY slag"""):
                 row = self.tablePostupl.rowCount()
                 tableName.setRowCount(row + 1)
                 tableName.setItem(row, 0, QtWidgets.QTableWidgetItem(str(summa)))

@@ -1,7 +1,8 @@
 import sys
 
 from PyQt5.QtWidgets import *
-from test_project.widget import Ui_Dialog
+from widget import Ui_Dialog
+
 
 
 class MainWindow(QMainWindow, Ui_Dialog):
