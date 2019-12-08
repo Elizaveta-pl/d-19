@@ -98,8 +98,8 @@ class Rashod(object):
         m = self.data.get(self.comboBox.currentText())
         y = self.comboBox_2.currentText()
         with sqlite3.connect("baza.db") as connect:
-            for summa, operacia, day, month, year, transact, slot in connect.execute(
-                    f"""SELECT * FROM Dohodi where transact=0 and month = {m} and year = {y} ORDER BY slot"""):
+            for summa, operacia, day, month, year, transact, slag in connect.execute(
+                    f"""SELECT * FROM Dohodi where transact=0 and month = {m} and year = {y} ORDER BY slag"""):
                 row = self.tableWidget_2.rowCount()
                 self.tableWidget_2.setRowCount(row + 1)
                 self.tableWidget_2.setItem(row, 0, QtWidgets.QTableWidgetItem(str(summa)))
@@ -120,8 +120,8 @@ class Rashod(object):
         m = self.data.get(self.comboBox.currentText())
         y = self.comboBox_2.currentText()
         with sqlite3.connect("baza.db") as connect:
-            for summa, operacia, day, month, year, transact, slot in connect.execute(
-                    f"""SELECT * FROM Dohodi where transact=1 and month = {m} and year = {y} ORDER BY slot"""):
+            for summa, operacia, day, month, year, transact, slag in connect.execute(
+                    f"""SELECT * FROM Dohodi where transact=1 and month = {m} and year = {y} ORDER BY slag"""):
                 row = self.tableWidget.rowCount()
                 self.tableWidget.setRowCount(row + 1)
                 self.tableWidget.setItem(row, 0, QtWidgets.QTableWidgetItem(str(summa)))
