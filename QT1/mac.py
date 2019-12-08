@@ -1,21 +1,33 @@
 import sys
 from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QLabel
 from PyQt5.QtWidgets import QFrame, QVBoxLayout, QCheckBox, QPlainTextEdit
-
+from PyQt5 import QtCore
 
 class Example(QWidget):
     def __init__(self):
         super().__init__()
-        self.initUI()
+        self.initUI(self)
 
-    def initUI(self):
-        self.setGeometry(100, 100, 500, 300)
-        self.setWindowTitle('Макдоналдс')
+    def initUI(self, Dialog):
+        # Dialog.setGeometry(100, 100, 500, 300)
+        # Dialog.setWindowTitle('Макдоналдс')
+        Dialog.resize(500, 300)
 
-        self.btn = QPushButton('Заказать', self)
-        self.btn.resize(self.btn.sizeHint())
-        self.btn.move(100, 200)
-        #self.btn.clicked.connect(self.hello)
+        self.btn = QPushButton(Dialog)
+        # self.btn.resize(self.btn.sizeHint())
+        self.btn.move(200, 250)
+        self.btn.clicked.connect(self.check)
+
+
+        self.check = QPlainTextEdit(Dialog)
+        self.check.setGeometry(QtCore.QRect(280, 25, 200, 200))
+        self.check.setObjectName("check")
+        # self.check.setPlainText("Chek")
+        self.check.raise_()
+
+        self.label = QLabel('Чек:', Dialog)
+        self.label.setGeometry(QtCore.QRect(280, 5, 50, 20))
+        # self.centerLyt.addWidget(label)
 
         self.cheez_burger = QCheckBox("Чизбургер", self)
         self.cheez_burger.move(20, 20)
@@ -35,40 +47,36 @@ class Example(QWidget):
         self.colla = QCheckBox("Кока-Кола", self)
         self.colla.move(170, 80)
 
-        self.centerFrm = QFrame(self)
-        # self.centerFrm.logicalDpiX()
-        # self.centerFrm.setStyleSheet("QWidget { background-color: #ddeeff; }")
+        self.retranslateUi(Dialog)
+        QtCore.QMetaObject.connectSlotsByName(Dialog)
 
-        self.centerLyt = QVBoxLayout()
-        label = QLabel('Чек:')
-        self.centerLyt.addWidget(label)
-
-
-
-        self.centerFrm.setLayout(self.centerLyt)
-        # self.setCentralWidget(self.centerFrm)
-        #
-        self.check = QPlainTextEdit()
-        # self.check.setPlainText("Chek")
-        # self.check.setStyleSheet("QPlainTextEdit { background-color: #ffffff; }")
-        self.check.setMinimumHeight(100)
-        self.check.setMaximumHeight(300)
-        self.check.setMinimumWidth(100)
-        self.check.setMaximumWidth(300)
-        self.centerLyt.addWidget(self.check)
         self.show()
 
-    def hello(self):
-        chislo = int(self.chislo_input.text())
-        chislo2 = int(self.chislo2_input.text())
-        print(chislo)
-        if chislo2 == 0:
-            self.label_error.setText("На 0 делить нельзя. Измените 2 число.")
-        else:
-            self.LCD_delen.display(chislo // chislo2)
-        self.LCD_plus.display(chislo + chislo2)
-        self.LCD_minus.display(chislo - chislo2)
-        self.LCD_umn.display(chislo * chislo2)
+    def retranslateUi(self, Dialog):
+        _translate = QtCore.QCoreApplication.translate
+        Dialog.setWindowTitle(_translate("Dialog", "Макдоналдс"))
+        self.btn.setText(_translate("Dialog", "Заказать"))
+
+
+    def check(self):
+        if self.cheez_burger.isChecked():
+            text = self.cheez_burger.text()
+            print(f'text = {text}')
+            self.check.setPlainText(text)
+
+        for button in self.findChildren(QCheckBox):
+            print(button)
+            # button.clicked.connect(_on_button_clicked)
+        # chislo = int(self.chislo_input.text())
+        # chislo2 = int(self.chislo2_input.text())
+        # print(chislo)
+        # if chislo2 == 0:
+        #     self.label_error.setText("На 0 делить нельзя. Измените 2 число.")
+        # else:
+        #     self.LCD_delen.display(chislo // chislo2)
+        # self.LCD_plus.display(chislo + chislo2)
+        # self.LCD_minus.display(chislo - chislo2)
+        # self.LCD_umn.display(chislo * chislo2)
 
 
 if __name__ == '__main__':

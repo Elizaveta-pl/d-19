@@ -8,11 +8,11 @@ import sys
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
-        uic.loadUi('Ui.ui', self)
+        uic.loadUi('UI.ui', self)
         self.pushButton.clicked.connect(self.fill)
 
     def fill(self):
-        print1
+        print('1')
 
 
 app = QApplication(sys.argv)

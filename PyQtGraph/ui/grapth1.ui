@@ -36,17 +36,6 @@
     </rect>
    </property>
   </widget>
-  <widget class="QWidget" name="gridLayoutWidget">
-   <property name="geometry">
-    <rect>
-     <x>90</x>
-     <y>20</y>
-     <width>160</width>
-     <height>80</height>
-    </rect>
-   </property>
-   <layout class="QGridLayout" name="gridLayout"/>
-  </widget>
   <widget class="QPushButton" name="pushBuild">
    <property name="geometry">
     <rect>
@@ -83,12 +72,22 @@
     <string>Добавить формулу</string>
    </property>
   </widget>
+  <widget class="QPlainTextEdit" name="check">
+   <property name="geometry">
+    <rect>
+     <x>120</x>
+     <y>400</y>
+     <width>104</width>
+     <height>70</height>
+    </rect>
+   </property>
+  </widget>
   <zorder>listViewGrapth</zorder>
-  <zorder>gridLayoutWidget</zorder>
   <zorder>pushBuild</zorder>
   <zorder>lineGrapth</zorder>
   <zorder>label</zorder>
   <zorder>listWidgetGrapth</zorder>
+  <zorder>check</zorder>
  </widget>
  <resources/>
  <connections/>
