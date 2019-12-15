@@ -3,14 +3,13 @@ import pygame
 
 def draw(n):
     screen.fill((0, 0, 0))
-    Rect = 0, 0, 300, 300
-    g = 0
-    s = 2 * n
-    for i in range(1, 1 + n):
+    for i in range(0, n):
+        x = 150 / n * i
+        d = (150 - x) * 2
+        Rect = x, 0, d, 300
+        Lect = 0, x, 300, d
         pygame.draw.ellipse(screen, (255, 255, 255), Rect, 1)
-        Rect = 300/(n*i), 0, 300 - (300 / n * i), 300
-        g += 2 * n
-        s += 2 * n
+        pygame.draw.ellipse(screen, (255, 255, 255), Lect, 1)
 
 
 pygame.init()
