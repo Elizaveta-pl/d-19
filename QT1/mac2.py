@@ -126,6 +126,7 @@ class Example(QWidget):
                 # print(button.isChecked())
 
                 print(f'button = {button}')
+                print(dir())
                 self.check.appendPlainText(button.objectName())
 
     def state_changed(self, name):
