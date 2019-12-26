@@ -5,8 +5,8 @@ class Bomb(pygame.sprite.Sprite):
 
     def __init__(self, group):
         super().__init__(group)
-        self.image = pygame.image.load("bomb.png").convert_alpha()
-        self.image_boom = pygame.image.load("boom.png").convert_alpha()
+        self.image = pygame.image.load("data/bomb.png").convert_alpha()
+        self.image_boom = pygame.image.load("data/boom.png").convert_alpha()
         self.rect = self.image.get_rect()
         self.rect.x = random.randrange(430)
         self.rect.y = random.randrange(430)
