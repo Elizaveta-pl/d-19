@@ -42,9 +42,10 @@ class Example(QWidget):
         h = 0
         with open('wares.csv', encoding="utf8") as csvfile:
             reader = csv.reader(csvfile, delimiter=';', quotechar='"')
-            #title1 = next(reader)
-            #print(type(title1))
+            # title1 = next(reader)
+            # print(type(title1))
             title1 = sorted(list(reader), key=lambda item: item[1], reverse=True)
+            print(type(title1))
             self.tableWidget.setColumnCount(len(title1))
             self.tableWidget.setHorizontalHeaderLabels(title1)
             self.tableWidget.setRowCount(0)
@@ -59,8 +60,9 @@ class Example(QWidget):
         self.tableWidget.resizeColumnsToContents()
 
     def colorRow(self, row, color):
-        for i in range(self.tableWidget.columnCount()):
-            self.tableWidget.item(row, i).setBackground(color)
+        # for i in range(self.tableWidget.columnCount()):
+        #     self.tableWidget.item(row, i).setBackground(color)
+        pass
 
 
 if __name__ == '__main__':
