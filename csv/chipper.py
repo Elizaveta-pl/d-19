@@ -42,12 +42,12 @@ class Example(QWidget):
         h = 0
         with open('wares.csv', encoding="utf8") as csvfile:
             reader = csv.reader(csvfile, delimiter=';', quotechar='"')
-            # title1 = next(reader)
-            # print(type(title1))
-            title1 = sorted(list(reader), key=lambda item: item[1], reverse=True)
-            print(type(title1))
-            self.tableWidget.setColumnCount(len(title1))
-            self.tableWidget.setHorizontalHeaderLabels(title1)
+            title1 = next(reader)
+
+            # title1 = sorted(list(reader), key=lambda item: item[1], reverse=True)
+            print(title1)
+            # self.tableWidget.setColumnCount(len(title1))
+            # self.tableWidget.setHorizontalHeaderLabels(title1)
             self.tableWidget.setRowCount(0)
             for i, row in enumerate(reader):
                 h += 1

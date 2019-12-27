@@ -46,6 +46,16 @@
       <height>25</height>
      </rect>
     </property>
+    <item>
+     <property name="text">
+      <string>Новый элемент1</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Новый элемент2</string>
+     </property>
+    </item>
    </widget>
    <widget class="QTextEdit" name="textEdit">
     <property name="geometry">

@@ -27,6 +27,8 @@ class Ui_Dialog(object):
         self.comboBox = QtWidgets.QComboBox(self.centralwidget)
         self.comboBox.setGeometry(QtCore.QRect(10, 10, 131, 25))
         self.comboBox.setObjectName("comboBox")
+        self.comboBox.addItem("")
+        self.comboBox.addItem("")
         self.textEdit = QtWidgets.QTextEdit(self.centralwidget)
         self.textEdit.setGeometry(QtCore.QRect(163, 10, 221, 31))
         self.textEdit.setObjectName("textEdit")
@@ -46,6 +48,8 @@ class Ui_Dialog(object):
         _translate = QtCore.QCoreApplication.translate
         Dialog.setWindowTitle(_translate("Dialog", "Поиск фильмов"))
         self.pushButton.setText(_translate("Dialog", "Заказать"))
+        self.comboBox.setItemText(0, _translate("Dialog", "Новый элемент1"))
+        self.comboBox.setItemText(1, _translate("Dialog", "Новый элемент2"))
 
 
 if __name__ == "__main__":
