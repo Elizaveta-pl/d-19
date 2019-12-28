@@ -82,6 +82,7 @@ class Ui_Dialog(object):
         print(self.find_setting.items())
     def search(self):
         self.del_row()
+        z = ['<', '>', '=']
         # con = sqlite3.connect(input())
         con = sqlite3.connect("films.db")
 
@@ -92,7 +93,21 @@ class Ui_Dialog(object):
         #                      ' WHERE  title = "комедия") """).fetchall()
         # self.where_sql = 'duration'
         self.where_sql_text = f'"{self.textEdit.toPlainText()}"'
-        text_sql = f'SELECT * FROM Films  WHERE {self.where_sql} = {self.where_sql_text}'
+        text_sql = f'SELECT * FROM Films  WHERE {self.where_sql} = {self.where_sql_text} LIMIT 1'
+
+        if self.textEdit.toPlainText().strip().upper().startswith('LIKE'):
+            pass
+        elif self.textEdit.toPlainText().strip()[0] in z:
+            print(self.textEdit.toPlainText().strip()[0])
+        else:
+            self.textEdit.setPlainText('= ' + self.textEdit.toPlainText())
+
+        #print(f' test = {test}')
+
+        self.textEdit.setPlainText(self.textEdit.toPlainText().replace("'", '"'))
+
+
+        text_sql = f'SELECT * FROM Films  WHERE  {self.where_sql} {self.textEdit.toPlainText()} LIMIT 1'
         print(text_sql)
         # result = cur.execute("SELECT * FROM Films  WHERE duration >= 1680")
         result = cur.execute(text_sql)
