@@ -13,7 +13,11 @@ import sqlite3, random
 
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
-        self.find_setting = ['Название', 'Год выпуска', 'Продолжительность']
+        self.where_sql = 'title'
+        self.where_sql_text = ''
+
+        # self.find_setting = ['Название1', 'Год выпуска1', 'Продолжительность1']
+        self.find_setting = {'title':'0','year':'1', 'duration':'2'}
         Dialog.setObjectName("Dialog")
         Dialog.resize(565, 438)
         self.centralwidget = QtWidgets.QWidget(Dialog)
@@ -67,10 +71,17 @@ class Ui_Dialog(object):
         QtCore.QMetaObject.connectSlotsByName(Dialog)
 
     def add_combo_box(self):
-        for n in self.find_setting:
+        for n in self.find_setting.keys():
             self.comboBox.addItem(n)
 
+        print(self.find_setting.values())
+        # print(self.find_setting.get(self.find_setting.keys()[self.comboBox.currentIndex()]))
+
+        print(self.find_setting.keys())
+        print(list(self.find_setting.keys())[self.comboBox.currentIndex()])
+        print(self.find_setting.items())
     def search(self):
+        self.del_row()
         # con = sqlite3.connect(input())
         con = sqlite3.connect("films.db")
 
@@ -79,8 +90,12 @@ class Ui_Dialog(object):
         # result = cur.execute("""SELECT title FROM Films
         #                         WHERE duration >= 60 and genre=(SELECT id FROM genres'
         #                      ' WHERE  title = "комедия") """).fetchall()
-        result = cur.execute("""SELECT * FROM Films
-                                        WHERE duration >= 1680 """)
+        # self.where_sql = 'duration'
+        self.where_sql_text = f'"{self.textEdit.toPlainText()}"'
+        text_sql = f'SELECT * FROM Films  WHERE {self.where_sql} = {self.where_sql_text}'
+        print(text_sql)
+        # result = cur.execute("SELECT * FROM Films  WHERE duration >= 1680")
+        result = cur.execute(text_sql)
         # names = result.keys()
         names_title = [description[0] for description in result.description]
         self.checkWidget.setColumnCount(len(names_title))
@@ -88,24 +103,32 @@ class Ui_Dialog(object):
 
         self.addrow(result)
         con.close()
+    def del_row(self):
+
+        for d in range(self.checkWidget.rowCount()):
+            self.checkWidget.removeRow(0)
+
 
     def onActivated(self, i):
-
         if str == "Название":
             print(i)
 
     def selectionchange(self, i):
+        print(list(self.find_setting.keys())[self.comboBox.currentIndex()])
 
         for count in range(self.comboBox.count()):
             print(self.comboBox.itemText(count))
+
+        self.where_sql = list(self.find_setting.keys())[self.comboBox.currentIndex()]
+        print(f'self.where_sql = {self.where_sql}' )
         print("Current index", i, "selection changed ",
-              self.comboBox.currentText())
+              self.comboBox.currentText(), "selection 123 ", self.comboBox.currentIndex())
     def addrow(self, result):
         for i, row in enumerate(result):
             # print(row)
             self.checkWidget.setRowCount(self.checkWidget.rowCount() + 1)
             for j, elem in enumerate(row):
-                print(f'elem = {elem}, i = {i}, j = {j}')
+                # print(f'elem = {elem}, i = {i}, j = {j}')
                 self.checkWidget.setItem(i, j, QtWidgets.QTableWidgetItem(str(elem)))
                 # if h <= 5:
                 #     self.colorRow(i, QtWidgets.QColor(random.randint(0, 255),
@@ -119,7 +142,9 @@ class Ui_Dialog(object):
         _translate = QtCore.QCoreApplication.translate
         Dialog.setWindowTitle(_translate("Dialog", "Поиск фильмов"))
         self.pushButton.setText(_translate("Dialog", "Найти"))
-
+        self.comboBox.setItemText(0, _translate("Dialog", "Название"))
+        self.comboBox.setItemText(1, _translate("Dialog", "Год выпуска"))
+        self.comboBox.setItemText(2, _translate("Dialog", "Продолжительность"))
 
 if __name__ == "__main__":
     import sys

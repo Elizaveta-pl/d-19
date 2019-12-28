@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'QT1/ui/find.ui'
 #
-# Created by: PyQt5 UI code generator 5.13.1
+# Created by: PyQt5 UI code generator 5.13.2
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -20,7 +20,7 @@ class Ui_Dialog(object):
         self.pushButton.setGeometry(QtCore.QRect(140, 350, 89, 25))
         self.pushButton.setObjectName("pushButton")
         self.checkWidget = QtWidgets.QTableWidget(self.centralwidget)
-        self.checkWidget.setGeometry(QtCore.QRect(270, 110, 256, 161))
+        self.checkWidget.setGeometry(QtCore.QRect(5, 50, 521, 281))
         self.checkWidget.setObjectName("checkWidget")
         self.checkWidget.setColumnCount(0)
         self.checkWidget.setRowCount(0)
@@ -47,16 +47,6 @@ class Ui_Dialog(object):
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
         Dialog.setWindowTitle(_translate("Dialog", "Поиск фильмов"))
-        self.pushButton.setText(_translate("Dialog", "Заказать"))
+        self.pushButton.setText(_translate("Dialog", "Найти"))
         self.comboBox.setItemText(0, _translate("Dialog", "Новый элемент1"))
         self.comboBox.setItemText(1, _translate("Dialog", "Новый элемент2"))
-
-
-if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    Dialog = QtWidgets.QMainWindow()
-    ui = Ui_Dialog()
-    ui.setupUi(Dialog)
-    Dialog.show()
-    sys.exit(app.exec_())
