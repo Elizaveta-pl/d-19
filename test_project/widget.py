@@ -193,9 +193,8 @@ class Ui_Dialog(object):
         # # self.db_in_tabl()
 
         with sqlite3.connect("baza.db") as connect:
-            # for  summa, operacia, day, month, year, transact, slag in connect.execute(f"""SELECT * FROM Dohodi where transact=0 ORDER BY slag"""):
-            for summa, operacia, day, month, year, transact, slag in connect.execute(
-                        f"""SELECT * FROM Dohodi where transact=0 ORDER BY slag"""):
+            for  summa, operacia, day, month, year, transact, slag in connect.execute(
+                    f"""SELECT * FROM Dohodi where transact=0 ORDER BY slot"""):
                 row = self.tablePostupl.rowCount()
                 tableName.setRowCount(row + 1)
                 tableName.setItem(row, 0, QtWidgets.QTableWidgetItem(str(summa)))

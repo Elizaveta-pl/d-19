@@ -1,3 +1,4 @@
+<<<<<<<<< Temporary merge branch 1
 Click
 ipython
 jsonschema
@@ -6,3 +7,10 @@ Pillow
 PyQt5
 PyQt5-sip
 pyqt5-tools
+=========
+ipython
+jupyter
+pyqt5
+pyqt5-tools
+
+>>>>>>>>> Temporary merge branch 2
