@@ -60,7 +60,6 @@ class Ui_Dialog(object):
         self.del_row()
         z = ['<', '>', '=']
         con = sqlite3.connect("films.db")
-
         cur = con.cursor()
 
         self.where_sql_text = f'"{self.textEdit.toPlainText()}"'
