@@ -7,6 +7,20 @@ import sys
 
 #sqlite> CREATE TABLE Images(Id INTEGER PRIMARY KEY, Data BLOB);
 
+books_jpg = ['jpg/moidodir.jpg',
+            'jpg/aibolit.jpg',
+            'jpg/dedmoroz.jpg',
+            'jpg/kradensolnce.jpg',
+            'jpg/garripotter.jpg',
+            'jpg/devochkaszemli.jpg',
+            'jpg/blezs.jpg',
+            'jpg/ono.jpg',
+            'jpg/devushkaivtumane.jpg',
+            'jpg/agatakristi.jpg',
+            'jpg/motilek.jpg',
+            'jpg/trezorium.jpg'
+            ]
+
 # Функция открытия изображения в бинарном режиме
 def readImage(filename):
     try:
@@ -24,28 +38,32 @@ def readImage(filename):
             # Закрываем подключение с файлом
             fin.close()
 
-
+jpg = []
 try:
     # Открываем базу данных
-    con = sqlite3.connect('test.db')
-    cur = con.cursor()
-    # Получаем бинарные данные нашего файла
-    data = readImage("woman.jpg")
-    # Конвертируем данные
-    binary = sqlite3.Binary(data)
-    # Готовим запрос в базу
-    cur.execute("INSERT INTO Photo(body) VALUES (?)", (binary,))
-    # Выполняем запрос
-    con.commit()
-    print("Record inserted successfully into SqliteDb_developers table ", cur.rowcount)
-    cur.close()
-
+    # con = sqlite3.connect('catalog.db')
+    # cur = con.cursor()
+    for book_jpg in books_jpg:
+        # Получаем бинарные данные нашего файла
+        data =
+        # data = readImage(book_jpg)
+        # print(f'data = {data}')
+        jpg.append(data)
+        # Конвертируем данные
+        # binary = sqlite3.Binary(data)
+        # Готовим запрос в базу
+        # cur.execute("INSERT INTO Photo(body) VALUES (?)", (binary,))
+        # Выполняем запрос
+        # con.commit()
+        # print("Record inserted successfully into SqliteDb_developers table ", cur.rowcount)
+    # cur.close()
+    print(jpg)
 # В случаи ошибки выводим ее текст.
 except sqlite3.Error as error:
     print("Failed to insert data into sqlite table", error)
 
-finally:
-    if con:
-        # Закрываем подключение с базой данных
-        con.close()
-        print("The SQLite connection is closed")
+# finally:
+#     if con:
+#         # Закрываем подключение с базой данных
+#         con.close()
+#         print("The SQLite connection is closed")

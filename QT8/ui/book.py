@@ -1,5 +1,12 @@
 # -*- coding: utf-8 -*-
 
+# Form implementation generated from reading ui file 'QT8/ui/book.ui'
+#
+# Created by: PyQt5 UI code generator 5.14.0
+#
+# WARNING! All changes made in this file will be lost!
+
+
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
@@ -13,7 +20,7 @@ class Ui_Dialog(object):
         self.pushButton.setGeometry(QtCore.QRect(270, 390, 101, 31))
         self.pushButton.setObjectName("pushButton")
         self.checkWidget = QtWidgets.QTableWidget(self.centralwidget)
-        self.checkWidget.setGeometry(QtCore.QRect(20, 50, 600, 330))
+        self.checkWidget.setGeometry(QtCore.QRect(20, 50, 441, 321))
         self.checkWidget.setObjectName("checkWidget")
         self.checkWidget.setColumnCount(0)
         self.checkWidget.setRowCount(0)
@@ -23,6 +30,9 @@ class Ui_Dialog(object):
         self.textEdit = QtWidgets.QTextEdit(self.centralwidget)
         self.textEdit.setGeometry(QtCore.QRect(210, 10, 250, 30))
         self.textEdit.setObjectName("textEdit")
+        self.label = QtWidgets.QLabel(self.centralwidget)
+        self.label.setGeometry(QtCore.QRect(490, 70, 131, 181))
+        self.label.setObjectName("label")
         Dialog.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(Dialog)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 640, 22))
@@ -39,13 +49,4 @@ class Ui_Dialog(object):
         _translate = QtCore.QCoreApplication.translate
         Dialog.setWindowTitle(_translate("Dialog", "Каталог библиотеки"))
         self.pushButton.setText(_translate("Dialog", "Найти"))
-
-
-if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    Dialog = QtWidgets.QMainWindow()
-    ui = Ui_Dialog()
-    ui.setupUi(Dialog)
-    Dialog.show()
-    sys.exit(app.exec_())
+        self.label.setText(_translate("Dialog", "TextLabel"))
