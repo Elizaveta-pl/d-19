@@ -3,6 +3,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 import sqlite3, random, sys
 
+
 class Ui_Dialog(object):
 
     def setupUi(self, Dialog):
@@ -10,15 +11,6 @@ class Ui_Dialog(object):
         self.where_sql = 'title'
         self.where_sql_text = ''
         self.find_setting = {'title': '0', 'autor': '1'}
-        # self.p_text.keyPressEvent = self.keyPressEvent
-
-        # self.keymap = {QtCore.Qt.Key_Left: _board.tryLeft,
-        #                QtCore.Qt.Key_Right: _board.tryRight,
-        #                QtCore.Qt.Key_Up: _board.tryRorateCCW,
-        #                QtCore.Qt.Key_Down: _board.tryRorateCCW,
-        #                QtCore.Qt.Key_Space: _board.dropDown,
-        #                QtCore.Qt.Key_D: _board.tryLineDown}
-
 
         Dialog.setObjectName("Dialog")
         Dialog.resize(800, 600)
@@ -63,7 +55,6 @@ class Ui_Dialog(object):
         self.label = QtWidgets.QLabel(self.centralwidget)
         self.label.setGeometry(QtCore.QRect(600, 10, 130, 180))
         self.label.setObjectName("label")
-
         self.label_2 = QtWidgets.QLabel(self.centralwidget)
         self.label_2.setGeometry(QtCore.QRect(530, 210, 251, 31))
         self.label_2.setAlignment(QtCore.Qt.AlignCenter)
@@ -101,12 +92,7 @@ class Ui_Dialog(object):
         self.label_genre.setAlignment(QtCore.Qt.AlignCenter)
         self.label_genre.setObjectName("label_genre")
 
-
-        self.pixmap = QtGui.QPixmap('jpg/blezs.jpg').scaledToHeight(200)
-        self.label.setPixmap(self.pixmap)
         self.label.resize(120, 200)
-        # self.label.move(200, 200)
-        # self.resize(self.pixmap.width(), self.pixmap.height())
 
         Dialog.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(Dialog)
@@ -131,41 +117,20 @@ class Ui_Dialog(object):
         self.label_4.setText(_translate("Dialog", "Год выпуска"))
         self.label_5.setText(_translate("Dialog", "Жанр"))
 
-
     def activatedRowColumn(self, r, c):
         self.update_image(r)
         self.update_text(r)
-        # self.lbl.setText("Активная: строка->`{}`, столбец->`{}`, ячейка->`<b> {} : {}</b> `".format(r, c, r, c, ))
-
-    # def keyPressEvent(self, e):
-    #     print(f'event =  {e}, e.key() = {e.key()}')
-    #     if e.key() == QtCore.Qt.Key_Return:
-    #         print(' return')
-    #     elif e.key() == QtCore.Qt.Key_Enter:
-    #         print(' enter')
-
-    # def keyPressEvent(self, event):
-    #     key = event.key()
-    #     if key == QtCore.Qt.Key_Escape:
-    #         self.paused ^= True
-    #     elif not self.paused and key in self.keymap:
-    #         self.keymap[key]()
-    #
 
     def changedRowColumn(self, r, c):
         pass
-        # self.update_image(r)
-        # self.lbl.setText("Изменились данные ячейки->`<b> {} : {}<b>`".format(r, c, ))
 
     def clickedRowColumn(self, r, c):
         self.update_image(r)
         self.update_text(r)
 
-
     def enteredRowColumn(self, r, c):
         self.update_image(r)
         self.update_text(r)
-        # self.lbl.setText("<b>Курсор мыши в ячейкe->`<i style='color:red'> {} : {} </i>`</b>".format(r, c, ))
 
     def add_combo_box(self):
         for n in self.find_setting.keys():
@@ -184,26 +149,12 @@ class Ui_Dialog(object):
     def update_image(self, r):
         con = sqlite3.connect('catalog_1.db')
         id = self.checkWidget.model().index(r, 0).data()
-        print(id)
-        # img_data = self.checkWidget.model().index(r, 5).data()
-        # print(type(bool(img_data)))
-        #
-        # self.pixmap = QtGui.QPixmap().scaledToHeight(200).loadFromData(bool(img_data))
-        # self.label.setPixmap(self.pixmap)
-        # self.label.resize(120, 200)
-
-
-
-        # self.pixmap = QtGui.QPixmap()
-        # self.pixmap.loadFromData(img_data)
-        # self.label.setPixmap(self.pixmap.scaledToHeight(150))
         text_sql_base = f'SELECT photo FROM book  WHERE id = {id}'
         for (img_data,) in con.execute(text_sql_base):
             print(type(bool(img_data)))
             self.pixmap = QtGui.QPixmap()
             self.pixmap.loadFromData(img_data)
             self.label.setPixmap(self.pixmap.scaledToHeight(150))
-
         self.label.resize(120, 200)
 
     def del_row(self):
@@ -229,13 +180,8 @@ class Ui_Dialog(object):
             # Открываем базу данных
             con = sqlite3.connect('catalog_1.db')
             cur = con.cursor()
-            # Получаем бинарные данные нашего файла
-            # data = readImage("woman.jpg")
-            # # Конвертируем данные
-            # binary = sqlite3.Binary(data)
 
             # Готовим текст запроса в базу
-
             text_sql_base = f'CREATE TABLE "book" ( `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, `title` ' \
                             f'text NOT NULL, `autor` TEXT, `year` INTEGER NOT NULL, `genre` TEXT NOT NULL,' \
                             f' `photo` blob NOT NULL)'
@@ -243,20 +189,6 @@ class Ui_Dialog(object):
             con.commit()
             text_sql_genres = f'INSERT INTO genres VALUES (?,?)'
             text_sql_book = f'INSERT INTO book VALUES (?,?,?,?,?,?)'
-            # for i, genre in enumerate(genres):
-            #      # Готовим запрос в базу
-            #     cur.execute(text_sql_genres, (i+1, genre))
-            #     # Выполняем запрос
-            #     con.commit()
-            #     print("Record inserted successfully into SqliteDb_developers table ", cur.rowcount)
-            # for i, book in enumerate(books):
-            #     print(f'book[0] = {book[0]}')
-            #     # Готовим запрос в базу
-            #     cur.execute(text_sql_book, (i + 1, book[0], book[1], book[2], book[3], book[4]))
-            #     # Выполняем запрос
-            #     con.commit()
-            #     print("Record inserted successfully into SqliteDb_developers table ", cur.rowcount)
-
             cur.close()
 
         # В случаи ошибки выводим ее текст.
@@ -274,9 +206,7 @@ class Ui_Dialog(object):
         z = ['<', '>', '=']
         con = sqlite3.connect("catalog_1.db")
         cur = con.cursor()
-
         self.where_sql_text = f'"{self.textEdit.toPlainText().strip()}"'
-
         if self.textEdit.toPlainText().strip() == "":
             text_sql = f'SELECT * FROM book'
         elif (self.textEdit.toPlainText().strip().upper().startswith('LIKE')) \
@@ -288,25 +218,6 @@ class Ui_Dialog(object):
             text_sql = f'SELECT * FROM book  WHERE {self.where_sql} ' \
                        f'= {self.where_sql_text}'
 
-        # if self.textEdit.toPlainText().strip() == "":
-        #     text_sql = f'SELECT * FROM book'
-        # elif self.textEdit.toPlainText().strip().upper().startswith('LIKE'):
-        #     pass
-        # elif self.textEdit.toPlainText().strip()[0] in z:
-        #     text_sql = f'SELECT * FROM book  WHERE  {self.where_sql}' \
-        #                f' {self.textEdit.toPlainText()}'
-        #     pass
-        # else:
-        #     self.textEdit.setPlainText('= ' + self.textEdit.toPlainText())
-        #     print(f'self.where_sql = {self.where_sql}, self.textEdit.toPlainText() {self.textEdit.toPlainText()}')
-        #     text_sql = f'SELECT * FROM book  WHERE  {self.where_sql}' \
-        #                f' {self.textEdit.toPlainText()}'
-
-        # self.textEdit.setPlainText(
-        #     self.textEdit.toPlainText().replace("'", '"'))
-
-        # text_sql = f'SELECT * FROM book  WHERE  {self.where_sql}' \
-        #            f' {self.textEdit.toPlainText()}'
         print(f'text_sql = {text_sql}')
         result = cur.execute(text_sql)
         names_title = [description[0] for description in result.description]
@@ -318,16 +229,9 @@ class Ui_Dialog(object):
 
     def addrow(self, result):
         for i, row in enumerate(result):
-            # print(row)
             self.checkWidget.setRowCount(self.checkWidget.rowCount() + 1)
             for j, elem in enumerate(row):
-                # print(f'elem = {elem}, i = {i}, j = {j}')
                 self.checkWidget.setItem(i, j, QtWidgets.QTableWidgetItem(str(elem)))
-                # if h <= 5:
-                #     self.colorRow(i, QtWidgets.QColor(random.randint(0, 255),
-                #                             random.randint(0, 255),
-                #                             random.randint(0, 255)))
-        # делаем ресайз колонок по содержимому
         self.checkWidget.resizeColumnsToContents()
 
 
