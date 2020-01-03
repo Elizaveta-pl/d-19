@@ -10,8 +10,8 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from time import time
 
-from test_project.rashod import Rashod
-from test_project.edit import Edit
+# from test_project.rashod import Rashod
+# from test_project.edit import Edit
 
 
 columnName = ["Первый", "Второй", "Третий", "Четвёртый"] # заголовки табл
@@ -163,7 +163,7 @@ class Ui_Dialog(object):
         # self.tablePostupl.setEditTriggers(QtWidgets.QAbstractItemView.CurrentChanged)  # выделение элемента
         # self.tablePostupl.setEditTriggers(QtWidgets.QAbstractItemView.DoubleClicked)
 
-        labels = ['Сумма', 'Операция', 'День', 'Месяц', 'Год', 'Edit']
+        labels = ['Сумма', 'Операция', 'День', 'Месяц', 'Год', 'slag']
 
         tableName.setColumnCount(len(labels))
         tableName.setHorizontalHeaderLabels(labels)
@@ -193,8 +193,9 @@ class Ui_Dialog(object):
         # # self.db_in_tabl()
 
         with sqlite3.connect("baza.db") as connect:
-            for  summa, operacia, day, month, year, transact, slag in connect.execute(
-                    f"""SELECT * FROM Dohodi where transact=0 ORDER BY slot"""):
+            # for  summa, operacia, day, month, year, transact, slag in connect.execute(f"""SELECT * FROM Dohodi where transact=0 ORDER BY slag"""):
+            for summa, operacia, day, month, year, slag in connect.execute(
+                        f"""SELECT * FROM Dohodi where transact=0 ORDER BY slag"""):
                 row = self.tablePostupl.rowCount()
                 tableName.setRowCount(row + 1)
                 tableName.setItem(row, 0, QtWidgets.QTableWidgetItem(str(summa)))
@@ -202,7 +203,7 @@ class Ui_Dialog(object):
                 tableName.setItem(row, 2, QtWidgets.QTableWidgetItem(str(day)))
                 tableName.setItem(row, 3, QtWidgets.QTableWidgetItem(str(month)))
                 tableName.setItem(row, 4, QtWidgets.QTableWidgetItem(str(year)))
-                tableName.setItem(row, 5, QtWidgets.QTableWidgetItem(str(slag)))
+                # tableName.setItem(row, 5, QtWidgets.QTableWidgetItem(str(slag)))
 
     def edit_selec_iten(self):
         try:

@@ -11,50 +11,40 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Поиск фильмов</string>
+   <string>Отбор фильмов по жанрам</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QPushButton" name="pushButton">
-    <property name="geometry">
-     <rect>
-      <x>140</x>
-      <y>350</y>
-      <width>89</width>
-      <height>25</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Заказать</string>
-    </property>
-   </widget>
    <widget class="QTableWidget" name="checkWidget">
     <property name="geometry">
      <rect>
-      <x>270</x>
-      <y>110</y>
-      <width>256</width>
-      <height>161</height>
+      <x>10</x>
+      <y>50</y>
+      <width>541</width>
+      <height>351</height>
      </rect>
     </property>
    </widget>
    <widget class="QComboBox" name="comboBox">
     <property name="geometry">
      <rect>
-      <x>10</x>
+      <x>300</x>
       <y>10</y>
-      <width>131</width>
+      <width>251</width>
       <height>25</height>
      </rect>
     </property>
    </widget>
-   <widget class="QTextEdit" name="textEdit">
+   <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
-      <x>163</x>
+      <x>150</x>
       <y>10</y>
-      <width>221</width>
-      <height>31</height>
+      <width>141</width>
+      <height>21</height>
      </rect>
+    </property>
+    <property name="text">
+     <string>Отфильтровать по:</string>
     </property>
    </widget>
   </widget>
