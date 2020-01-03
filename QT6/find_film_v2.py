@@ -1,12 +1,5 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'QT1/ui/find.ui'
-#
-# Created by: PyQt5 UI code generator 5.13.1
-#
-# WARNING! All changes made in this file will be lost!
-
-
 from PyQt5 import QtCore, QtGui, QtWidgets
 import sqlite3, random
 
@@ -45,6 +38,7 @@ class Ui_Dialog(object):
         self.menubar = QtWidgets.QMenuBar(Dialog)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 565, 22))
         self.menubar.setObjectName("menubar")
+        self.search()
         Dialog.setMenuBar(self.menubar)
         self.statusbar = QtWidgets.QStatusBar(Dialog)
         self.statusbar.setObjectName("statusbar")
@@ -60,25 +54,18 @@ class Ui_Dialog(object):
         self.del_row()
         z = ['<', '>', '=']
         con = sqlite3.connect("films.db")
-
         cur = con.cursor()
-
         self.where_sql_text = f'"{self.textEdit.toPlainText()}"'
-        text_sql = f'SELECT * FROM Films  WHERE {self.where_sql} ' \
-                   f'= {self.where_sql_text} LIMIT 1'
-
-        if self.textEdit.toPlainText().strip().upper().startswith('LIKE'):
-            pass
-        elif self.textEdit.toPlainText().strip()[0] in z:
-            pass
+        if self.textEdit.toPlainText().strip() == "":
+            text_sql = f'SELECT * FROM Films'
+        elif (self.textEdit.toPlainText().strip().upper().startswith('LIKE')) \
+                or (self.textEdit.toPlainText().strip()[0] in z):
+            self.where_sql_text = self.textEdit.toPlainText().replace("'", '"')
+            text_sql = f'SELECT * FROM Films  WHERE {self.where_sql} ' \
+                       f'{self.where_sql_text} LIMIT 1'
         else:
-            self.textEdit.setPlainText('= ' + self.textEdit.toPlainText())
-
-        self.textEdit.setPlainText(
-            self.textEdit.toPlainText().replace("'", '"'))
-
-        text_sql = f'SELECT * FROM Films  WHERE  {self.where_sql}' \
-                   f' {self.textEdit.toPlainText()} LIMIT 1'
+            text_sql = f'SELECT * FROM Films  WHERE {self.where_sql} ' \
+                       f'= {self.where_sql_text} LIMIT 1'
         result = cur.execute(text_sql)
         names_title = [description[0] for description in result.description]
         self.checkWidget.setColumnCount(len(names_title))
