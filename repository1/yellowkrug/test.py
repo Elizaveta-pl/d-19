@@ -1,7 +1,7 @@
 import sys
-from PyQt4 import QtGui, QtCore
+from PyQt5 import QtGui, QtCore, QtWidgets
 
-class Example(QtGui.QWidget):
+class Example(QtWidgets.QWidget):
 
     draw = False
 
@@ -15,7 +15,9 @@ class Example(QtGui.QWidget):
 
         self.setGeometry(400, 400, 400, 400)
 
-        qbtn = QtGui.QPushButton('Paint', self)
+        qbtn = QtWidgets.QPushButton('Paint', self)
+        # self.pushBuild = QtWidgets.QPushButton()
+
         qbtn.clicked.connect(self.buttn)
         qbtn.resize(qbtn.sizeHint())
         qbtn.move(50, 50)
@@ -28,7 +30,7 @@ class Example(QtGui.QWidget):
 
         qp = QtGui.QPainter()
         qp.begin(self)
-            self.drawRectangles(qp)
+        self.drawRectangles(qp)
         qp.end()
 
     def drawRectangles(self, qp):
@@ -44,10 +46,19 @@ class Example(QtGui.QWidget):
 
 def main():
 
-    app = QtGui.QApplication(sys.argv)
+    app = QtWidgets.QApplication(sys.argv)
     ex = Example()
     sys.exit(app.exec_())
 
 
 if __name__ == '__main__':
     main()
+
+# if __name__ == "__main__":
+#     import sys
+#     app = QtWidgets.QApplication(sys.argv)
+#     Dialog = QtWidgets.QWidget()
+#     ui = Ui_Dialog()
+#     ui.setupUi(Dialog)
+#     Dialog.show()
+#     sys.exit(app.exec_())
