@@ -5,7 +5,7 @@ import sqlite3, random, sys
 import sys
 
 from PyQt5.QtWidgets import QWidget, QApplication
-from PyQt5.QtGui import QPainter, QColor
+
 
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
@@ -30,7 +30,7 @@ class Ui_Dialog(object):
         self.pushButton = QtWidgets.QPushButton(self.centralwidget)
         self.pushButton.setGeometry(QtCore.QRect(270, 530, 100, 30))
         self.pushButton.setObjectName("pushButton")
-        # self.pushButton.clicked.connect(self.draw)
+        self.pushButton.clicked.connect(self.keyPressEvent)
 
         # # Add paint widget and paint
         # self.m = PaintWidget(self)
@@ -39,15 +39,23 @@ class Ui_Dialog(object):
 
 
         self.label = QtWidgets.QLabel(self.centralwidget)
-        self.label.setGeometry(QtCore.QRect(600, 10, 130, 180))
+        self.label.setGeometry(QtCore.QRect(60, 10, 130, 280))
         self.label.setObjectName("label")
 
-        self.pixmap = QtGui.QPixmap('jpg/blezs.jpg').scaledToHeight(200)
+        self.label_p = QtWidgets.QLabel(self.centralwidget)
+        self.label_p.setGeometry(QtCore.QRect(280, 10, 130, 280))
+        self.label_p.setObjectName("label")
+
+        self.pixmap = QtGui.QPixmap('jpg/blezs.jpg').scaledToHeight(300)
+
         self.label.setPixmap(self.pixmap)
-        self.label.resize(120, 200)
+        self.label.resize(180, 300)
+
+        # self.label_p.setPixmap(self.pixmap)
+        # self.label_p.resize(180, 300)
 
         # Add paint widget and paint
-        self.m = PaintWidget(Dialog)
+        # self.m = PaintWidget(Dialog)
         # self.m.move(10, 400)
         # self.label.setPicture(self.m)
         # self.label.resize(120, 200)
@@ -71,7 +79,7 @@ class Ui_Dialog(object):
         Dialog.setWindowTitle(_translate("Dialog", "Рисование"))
         self.pushButton.setText(_translate("Dialog", "Нарисовать"))
 
-class PaintWidget(QWidget):
+# class PaintWidget(QWidget):
     # def paintEvent(self, event):
     #     qp = QPainter(self)
     #
@@ -86,26 +94,43 @@ class PaintWidget(QWidget):
 
     #
     def paintEvent(self, event):
-        print('123')
-        qp = QtGui.QPainter(self)
-        qp.begin(self)
-        qp.drawEllipse(QtCore.QPoint(100, 100), 60, 60)
 
-        qp.drawEllipse(QtCore.QPoint(100, 100), 60, 60)
-        # set color for pen by property
-        qp.setPen(QtGui.QPen(QtCore.Qt.blue, 3, join=QtCore.Qt.MiterJoin))
-        # draw a rectangle
-        qp.drawRect(80, 160, 100, 100)
-        # set color for pen by Qt color
-        qp.setPen(QtGui.QPen(QtCore.Qt.red, 2))
-        # set brush
-        my_brush = QtGui.QBrush(QColor(33, 33, 100, 255), QtCore.Qt.DiagCrossPattern)
-        qp.setBrush(my_brush)
-        # draw a rectangle and fill with the brush
-        qp.drawRect(300, 300, 180, 180)
-        print('124')
-        # self.drawFlag(qp)
-        qp.end()
+        pixmap = QtGui.QPixmap(self.size())
+        self.mPixmap = pixmap
+        pixmap.fill(QtCore.Qt.white)
+        painter = QtGui.QPainter(pixmap)
+        painter.drawPixmap(0, 0, self.mPixmap)
+
+        painter.begin(self)
+
+        self.drawFlag(painter)
+
+        painter.end()
+
+        # self.drawBackground(painter)
+
+
+
+        # print('123')
+        # qp = QtGui.QPainter(self)
+        # qp.begin(self)
+        # qp.drawEllipse(QtCore.QPoint(100, 100), 60, 60)
+        #
+        # qp.drawEllipse(QtCore.QPoint(100, 100), 60, 60)
+        # # set color for pen by property
+        # qp.setPen(QtGui.QPen(QtCore.Qt.blue, 3, join=QtCore.Qt.MiterJoin))
+        # # draw a rectangle
+        # qp.drawRect(80, 160, 100, 100)
+        # # set color for pen by Qt color
+        # qp.setPen(QtGui.QPen(QtCore.Qt.red, 2))
+        # # set brush
+        # my_brush = QtGui.QBrush(QColor(33, 33, 100, 255), QtCore.Qt.DiagCrossPattern)
+        # qp.setBrush(my_brush)
+        # # draw a rectangle and fill with the brush
+        # qp.drawRect(300, 300, 180, 180)
+        # print('124')
+        #
+        # qp.end()
 
     # def draw(self):
     #     pass
@@ -113,24 +138,30 @@ class PaintWidget(QWidget):
 
 
 
-    def drawFlag(self,qp):
+    def drawFlag(self, qp):
         print('147')
-        # qp.setBrush(QColor(255, 0, 0))
-        # qp.drawRect(30, 30, 120, 30)
-        # qp.setBrush(QColor(0, 255, 0))
-        # qp.drawRect(30, 60, 120, 30)
-        # qp.setBrush(QColor(0, 0, 255))
-        # qp.drawRect(30, 90, 120, 30)
+        qp.setBrush(QtGui.QColor(255, 0, 0))
+        qp.drawRect(30, 30, 120, 30)
+        qp.setBrush(QtGui.QColor(0, 255, 0))
+        qp.drawRect(30, 60, 120, 30)
+        qp.setBrush(QtGui.QColor(0, 0, 255))
+        qp.drawRect(30, 90, 120, 30)
 
 
+        self.update()
 
-        brush = QtGui.QBrush(QtCore.Qt.SolidPattern)
-        qp.setBrush(brush)
-        qp.drawRect(10, 15, 120, 90)
+    def keyPressEvent(self, event):
+        # gey = event.key()
+        # self.func = (None, None)
+        update()
 
-        brush.setStyle(QtCore.Qt.VerPattern)
-        qp.setBrush(brush)
-        qp.drawRect(130, 195, 90, 60)
+        # brush = QtGui.QBrush(QtCore.Qt.SolidPattern)
+        # qp.setBrush(brush)
+        # qp.drawRect(10, 15, 120, 90)
+        #
+        # brush.setStyle(QtCore.Qt.VerPattern)
+        # qp.setBrush(brush)
+        # qp.drawRect(130, 195, 90, 60)
 
         # brush.setStyle(QtCore.Qt.BDiagPattern)
         # qp.setBrush(brush)
