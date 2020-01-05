@@ -1,16 +1,15 @@
-from PyQt5 import QtCore, QtGui, uic
-from pyqtgraph import PlotWidget, plot
+from PyQt5 import QtCore
+from pyqtgraph import PlotWidget
 import pyqtgraph as pg
 
-from PyQt5.QtWidgets import QApplication, QWidget, QMainWindow, QListView, \
-    QListWidget, QGridLayout, QPushButton, QLineEdit, QLabel
-# from ui import Ui_Dialog
-import sys  # We need sys so that we can pass argv to QApplication
-import os
+from PyQt5.QtWidgets import QApplication, QWidget, QMainWindow, QGridLayout,\
+    QPushButton, QLineEdit, QLabel
+import sys
 
-OPERATORS = {'+': (1, lambda x, y: x + y), '-': (1, lambda x, y: x - y),
+
+operators = {'+': (1, lambda x, y: x + y), '-': (1, lambda x, y: x - y),
              '*': (2, lambda x, y: x * y), '/': (2, lambda x, y: x / y),
-             '$': (2, lambda x, y: (x ** (1 / y))), '^': (2, lambda x, y: x ** y)}
+             'v': (2, lambda x, y: (x ** (1 / y))), '^': (2, lambda x, y: x ** y)}
 
 
 class Ui_Dialog(object):
@@ -47,8 +46,18 @@ class Ui_Dialog(object):
         self.pushBuild.setObjectName("pushBuild")
         self.pushBuild.clicked.connect(self.parsing)
 
-        # self.listViewGrapth.raise_()
-        # self.listWidgetGrapth.raise_()
+        self.label_2 = QLabel(Dialog)
+        self.label_2.setGeometry(QtCore.QRect(10, 10, 111, 21))
+        self.label_2.setObjectName("label_2")
+
+        self.lineEdit_xk = QLineEdit(Dialog)
+        self.lineEdit_xk.setGeometry(QtCore.QRect(150, 10, 21, 20))
+        self.lineEdit_xk.setObjectName("lineEdit_xk")
+
+        self.lineEdit_xn = QLineEdit(Dialog)
+        self.lineEdit_xn.setGeometry(QtCore.QRect(120, 10, 21, 20))
+        self.lineEdit_xn.setObjectName("lineEdit_xn")
+
         self.gridLayoutWidget.raise_()
         self.graphicsView.raise_()
         self.pushBuild.raise_()
@@ -60,33 +69,16 @@ class Ui_Dialog(object):
 
     def parsing(self):
 
-        self.x = [i for i in range(1, 20)]
-        self.y =[]
-        # self.y = [2 / i for i in self.calc(self.sort(self.parse(self.lineGrapth.text().replace('x', self.x))))]
-        for i in range(1, 20):
-            formula = self.lineGrapth.text().replace('x', str(i))
-            print(f'self.parse(formula = {list(self.parse(formula))}')
+        self.x = [i for i in range(int(self.lineEdit_xn.text()), int(self.lineEdit_xk.text()))]
+        self.y = []
+        for i in range(int(self.lineEdit_xn.text()), int(self.lineEdit_xk.text())):
             pr = self.calc(self.sort(self.parse(self.lineGrapth.text().replace('x', str(i)))))
             self.y.append(pr)
-        print(f' self.x = {self.x}')
-        print(f' self.y = {self.y}')
         self.grapth()
 
     def grapth(self):
         self.graphicsView.clear()
         self.graphWidget = pg.PlotWidget()
-
-        # self.x = [i for i in range(1, 20)]
-        # self.y = [2 / i for i in self.x]
-        # print(self.x)
-        # print(self.y)
-        # self.graphicsView(self.graphWidget)
-        # self.setCentralWidget(self.graphWidget)
-
-        hour = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-        temperature = [30, 32, 34, 32, 33, 31, 29, 32, 35, 45]
-
-        # plot data: x, y values
         self.graphicsView.plot(self.x, self.y, pen='g')
 
     def retranslateUi(self, Dialog):
@@ -96,9 +88,9 @@ class Ui_Dialog(object):
         self.label.setText(_translate("Dialog", "Добавить формулу y ="))
         self.label_r.setText(
             _translate("Dialog", "Формула записывается через пробел"))
+        self.label_2.setText(_translate("Dialog", "Введите диапозон х"))
 
     def parse(self, line):
-        print(f'line = {line}')
         num = ''
         for i in line:
             if i in '1234567890.':
@@ -106,54 +98,44 @@ class Ui_Dialog(object):
             elif num:
                 yield float(num)
                 num = ''
-            if i in OPERATORS or i in '()':
+            if i in operators or i in '()':
                 yield i
         if num:
             yield float(num)
 
     def sort(self, parsed):
-        tmp = []
+        cal = []
         for i in parsed:
-            if i in OPERATORS:
-                while tmp and tmp[-1] != '(' and OPERATORS[i][0] <= \
-                        OPERATORS[tmp[-1]][0]:
-                    yield tmp.pop()
-                tmp.append(i)
+            if i in operators:
+                while cal and cal[-1] != '(' and operators[i][0] <= operators[cal[-1]][0]:
+                    yield cal.pop()
+                cal.append(i)
             elif i == ')':
-                while tmp:
-                    x = tmp.pop()
+                while cal:
+                    x = cal.pop()
                     if x == '(':
                         break
                     yield x
             elif i == '(':
-                tmp.append(i)
+                cal.append(i)
             else:
                 yield i
-        while tmp:
-            yield tmp.pop()
+        while cal:
+            yield cal.pop()
 
     def calc(self, sort):
-        print(f'sort = {sort}')
-        tmp = []
+        cal = []
         for i in sort:
-            print(f'i = {i}')
-            if i in OPERATORS:
-                y = tmp.pop()
-                x = tmp.pop()
-                print(f' x = {x}, y = {y}')
-                tmp.append(OPERATORS[i][1](x, y))
+            if i in operators:
+                y = cal.pop()
+                x = cal.pop()
+                cal.append(operators[i][1](x, y))
             else:
-                tmp.append(i)
-        return tmp[0]
+                cal.append(i)
+        return cal[0]
 
-
-# class MainWindow(QMainWindow, Ui_Dialog):
-#     def __init__(self, parent=None, *args, **kwargs):
-#         QMainWindow.__init__(self)
-#         self.setupUi(self)
 
 class MainWindow(QMainWindow, Ui_Dialog):
-
     def __init__(self, *args, **kwargs):
         super(MainWindow, self).__init__(*args, **kwargs)
         self.setupUi(self)
