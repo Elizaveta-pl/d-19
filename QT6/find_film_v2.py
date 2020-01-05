@@ -2,6 +2,7 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 import sqlite3, random
+import sys
 
 
 class Ui_Dialog(object):
@@ -106,8 +107,6 @@ class Ui_Dialog(object):
 
 
 if __name__ == "__main__":
-    import sys
-
     app = QtWidgets.QApplication(sys.argv)
     Dialog = QtWidgets.QMainWindow()
     ui = Ui_Dialog()
