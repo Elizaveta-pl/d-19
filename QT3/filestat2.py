@@ -51,7 +51,7 @@ class Ui_MainWindow(object):
         self.pushButton = QtWidgets.QPushButton(self.centralwidget)
         self.pushButton.setGeometry(QtCore.QRect(120, 210, 211, 51))
         self.pushButton.setObjectName("pushButton")
-        self.pushButton.clicked.connect(self.znach())
+        self.pushButton.clicked.connect(self.znach)
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 468, 21))
@@ -69,22 +69,10 @@ class Ui_MainWindow(object):
         MainWindow.setWindowTitle(_translate("MainWindow", "Файловая статистика 2"))
         self.max.setText(_translate("MainWindow", "Самый часто встречающийся символ"))
         self.min.setText(_translate("MainWindow", "Самый редко встречающийся символ"))
-        self.textEdit_max.setHtml(_translate("MainWindow",
-                                             "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-                                             "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
-                                             "p, li { white-space: pre-wrap; }\n"
-                                             "</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:18pt; font-weight:600; font-style:normal;\">\n"
-                                             "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>"))
-        self.textEdit_min.setHtml(_translate("MainWindow",
-                                             "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-                                             "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
-                                             "p, li { white-space: pre-wrap; }\n"
-                                             "</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:18pt; font-weight:600; font-style:normal;\">\n"
-                                             "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>"))
         self.pushButton.setText(_translate("MainWindow", "Показать"))
 
     def znach(self):
-        g = list(open("input.txt"))
+        g = list(open('input.txt'))
         print(g)
         g_c = []
         for i in g:
