@@ -1,4 +1,5 @@
-
+print('Введите иня текстового файла')
+n = input()
 text = list(open('input_test.txt'))
 # zamena = input().split(' ')
 zamena = '* s -- —'.split(' ')
