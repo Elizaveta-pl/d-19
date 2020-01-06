@@ -50,7 +50,7 @@ class Ui_MainWindow(object):
         self.pushButton.setText(_translate("MainWindow", "Показать"))
 
     def znach(self):
-        g = list(open("input.txt"))
+
         g_c = []
         for i in g:
             g_c.append(i.split())
