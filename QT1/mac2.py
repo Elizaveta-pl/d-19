@@ -10,79 +10,48 @@ class Example(QWidget):
         self.initUI(self)
 
     def initUI(self, Dialog):
-        # Dialog.resize(500, 300)
-        Dialog.resize(800, 400)
-
-        self.menu = {'Чизбургер1': 20, 'Гамбургер1': 30, 'Картофель Фри1': 40, 'Чай1': 5, 'Кофе1': 10, 'Кока-Кола1': 13}
+        Dialog.resize(640, 300)
+        # Создаем словарь с наименованиями блюд, ценами и количеством в заказе
+        self.menu = {'Чизбургер': [20, 0], 'Гамбургер': [30, 0],
+                     'Картофель Фри': [40, 0], 'Чай': [5, 0],
+                     'Кофе': [10, 0], 'Кока-Кола': [13, 0]}
+        # Из ключей словаря menu формируем список блюд
+        self.menu3 = list(self.menu.keys())
         self.menu1 = []
+        self.menu2 = []
+        # Формируем список переменных для создания QCheckBox
+        self.checks = ['check' + str(i) for i in range(len(self.menu))]
+        # Формируем список переменных для создания  QSpinBox
+        self.spins = ['spin' + str(i) for i in range(len(self.menu))]
 
+        # создаём экземпляр класса QPushButton
         self.btn = QPushButton(Dialog)
+        # задаём размер кнопки
         self.btn.move(200, 250)
+        #  Указываем действие при нажатии на кнопку
         self.btn.clicked.connect(self.check)
-
+        # создаём экземпляр класса QPlainTextEdit
         self.check = QPlainTextEdit(Dialog)
-        self.check.setGeometry(QtCore.QRect(320, 25, 200, 200))
+        self.check.setGeometry(QtCore.QRect(260, 25, 350, 200))
         self.check.setObjectName("check")
         self.check.raise_()
+        # создаём экземпляр класса QLabel
+        self.label = QLabel(Dialog)
+        self.label.setGeometry(QtCore.QRect(260, 5, 50, 20))
 
-        self.label = QLabel('Чек:', Dialog)
-        self.label.setGeometry(QtCore.QRect(320, 5, 50, 20))
-
-        self.cheez_burger = QCheckBox(self)
-        self.cheez_burger.setObjectName('Чизбургер')
-        self.cheez_burger.stateChanged.connect(self.state_changed)
-        self.cheez_burger.move(20, 20)
-
-        self.spin_cheez_burger = QSpinBox(self)
-        self.spin_cheez_burger.setGeometry(QtCore.QRect(170, 110, 40, 25))
-        self.spin_cheez_burger.valueChanged.connect(self.change)
-        self.spin_cheez_burger.setObjectName("spinBox")
-
-        # self.check_0 = QCheckBox(self)
-        # self.check_0.setObjectName('Чизбургер')
-        # self.check_0.stateChanged.connect(self.state_changed)
-        # self.check_0.move(20, 110)
+        # Создаем элеметы QCheckBox и QSpinBox
         for i in range(len(self.menu)):
-            print(f' name1 = {list(self.menu.keys())[i]}')
-            name = f'self.check_{i}'
-            # print(type(self.check_0))
+            # print(f' name1 = {list(self.menu.keys())[i]}')
             self.add_element(list(self.menu.keys())[i], i)
-
-
-        # self.spin_0 = QSpinBox(self)
-        # self.spin_0.setGeometry(QtCore.QRect(170, 20, 40, 25))
-        # self.spin_0.valueChanged.connect(self.change)
-        # self.spin_0.setObjectName("spinBox")
-
-        self.gamburger = QCheckBox(self)
-        self.gamburger.setObjectName('Гамбургер')
-        self.gamburger.move(20, 50)
-
-        self.fri = QCheckBox(self)
-        self.fri.setObjectName('Картофель Фри')
-        self.fri.move(20, 80)
-
-        self.tea = QCheckBox(self)
-        self.tea.setObjectName('Чай')
-        self.tea.move(220, 20)
-
-        self.coffee = QCheckBox(self)
-        self.coffee.setObjectName('Кофе')
-        self.coffee.move(220, 50)
-
-        self.colla = QCheckBox(self)
-        self.colla.setObjectName('Кока-Кола')
-        self.colla.move(220, 80)
 
         self.check_tab = QWidget()
         self.check_tab.setObjectName("check")
 
-        self.checkWidget = QTableWidget(Dialog)
-        self.checkWidget.setGeometry(QtCore.QRect(530, 25, 256, 151))
-        self.checkWidget.setObjectName("checkWidget")
-        self.checkWidget.setColumnCount(0)
-        self.checkWidget.setRowCount(0)
-
+        # self.checkWidget = QTableWidget(Dialog)
+        # self.checkWidget.setGeometry(QtCore.QRect(530, 25, 256, 151))
+        # self.checkWidget.setObjectName("checkWidget")
+        # self.checkWidget.setColumnCount(0)
+        # self.checkWidget.setRowCount(0)
 
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
@@ -93,13 +62,8 @@ class Example(QWidget):
         _translate = QtCore.QCoreApplication.translate
         Dialog.setWindowTitle(_translate("Dialog", "Макдоналдс"))
         self.btn.setText(_translate("Dialog", "Заказать"))
-        self.gamburger.setText(_translate("Dialog", "Гамбургер"))
-        self.cheez_burger.setText(_translate("Dialog", "Чизбургер"))
-        self.fri.setText(_translate("Dialog", "Картофель Фри"))
-        self.tea.setText(_translate("Dialog", "Чай"))
-        self.coffee.setText(_translate("Dialog", "Кофе"))
-        self.colla.setText(_translate("Dialog", "Кока-Кола"))
-        # self.check_0.setText(_translate("Dialog", "Чизбургер"))
+        self.label.setText(_translate("Dialog", "Чек:"))
+
         name = self.menu.keys()
         print(f' name = {list(name)[0]}')
         print(f' len = {len(self.menu)}')
@@ -108,67 +72,90 @@ class Example(QWidget):
         #     name = f'self.check_{i}'
         #     print(type(self.check_0))
         print(dir(self))
-            # print(f'name {name.setText(_translate("Dialog", list( self.menu.keys())[i]))}')
-            # self.f"self.check_{i}".setText(_translate("Dialog", list( self.menu.keys())[i]))
+        # print(f'name {name.setText(_translate("Dialog", list( self.menu.keys())[i]))}')
+        # self.f"self.check_{i}".setText(_translate("Dialog", list( self.menu.keys())[i]))
 
+    def change(self, name, value):
+        print(f'name_check = {name}, value = {value}')
+        # self.r = int(self.spin_cheez_burger.text())
+        # # Price
+        # print(f'self.r = {self.r}')
+        # for i in self.menu.keys():
+        #     print(f'i = {i}')
+        # print(f'self.check1.objectName()= {self.checks[0].objectName()}')
+        # dir()
 
-    def change(self):
-        self.r = int(self.spin_cheez_burger.text())
-        # Price
-        # print(self.menu['Гамбургер'])
-        for i in self.menu.keys():
-            print(f'i = {i}')
-        dir()
     def check(self):
         self.check.clear()
+        itogo = 0
+        # Перебираем все обекты QCheckBox
         for button in self.findChildren(QCheckBox):
+            # Если QCheckBox выбран выводим на печать
+
             if button.isChecked():
                 # print(button.isChecked())
+                index = self.menu3.index(button.objectName())
+                stoimost = self.menu[button.objectName()][0]\
+                           * self.spins[index].value()
+                itogo = itogo + stoimost
 
-                print(f'button = {button}')
-                print(dir())
-                self.check.appendPlainText(button.objectName())
+                print(
+                    f'Имя = {button.objectName()} '
+                    f' количество  {self.spins[index].value()}'
+                    f' цена {self.menu[button.objectName()][0]}'
+                    f' стоимость {stoimost}')
+                print_check = f'{button.objectName()} - ' \
+                              f'{self.spins[index].value()} ' \
+                              f'- {self.menu[button.objectName()][0]}' \
+                              f' - {stoimost}'
+                self.check.appendPlainText(print_check)
+        self.check.appendPlainText(str(itogo))
 
     def state_changed(self, name):
-         print(f'name_check = {name}')
-         if self.cheez_burger.isChecked():
-            self.label.setText("CHECKED!")
-            self.spin_cheez_burger.setValue(1)
-            # self.spin_cheez_burger.text() == 1
-            self.change
-         else:
-            self.spin_cheez_burger.setValue(0)
-            self.label.setText("UNCHECKED!")
+        index = self.menu3.index(name)
+        print(f'state_changed = {name}')
+        print(f'checks = {self.checks[index].objectName()}')
+        print(f'spins = {self.spins[index].objectName()}')
+        print(f'index = {index}')
+
+        if self.checks[index].isChecked():
+            # При выборе блюда, количество устанавливаем равным 1.
+            self.spins[index].setValue(1)
+        else:
+            # При отказе от блюда, количество устанавливаем равным 0.
+            self.spins[index].setValue(0)
+
+        # if self.cheez_burger.isChecked():
+        #    self.label.setText("CHECKED!")
+        #    self.spin_cheez_burger.setValue(1)
+        #    # self.spin_cheez_burger.text() == 1
+        #    self.change
+        # else:
+        #    self.spin_cheez_burger.setValue(0)
+        #    self.label.setText("UNCHECKED!")
 
     def add_element(self, name, int):
         _translate = QtCore.QCoreApplication.translate
+        y = 20 + (int + 1) * 25
+        # создаём экземпляр класса QCheckBox
+        self.checks[int] = QCheckBox(self)
+        self.checks[int].setObjectName(str(name))
+        self.checks[int].stateChanged.connect(lambda: self.state_changed(name))
+        self.checks[int].move(20, y)
+        self.checks[int].setText(_translate("Dialog", str(name)))
 
-        name_check = f'self.check_{int}'
-        name_check = f'check_{int}'
-        y = 120 + (int + 1) * 25
-        # name = f'check_{1}'
-        print(f'name = {name_check}')
-        name_check = QCheckBox(self)
-        name_check.setObjectName(str(name))
-        name_check.stateChanged.connect(self.state_changed)
-        name_check.move(20, y)
-        name_check.setText(_translate("Dialog", str(name)))
-        self.menu1.append(name_check.objectName())
-        # print(f'name = {dir(name1)}')
-        # print(f'name1 = {name1.objectName()}')
-        # print(f'name_type = {type(name1)}')
-        print(f'menu1 = {self.menu1}')
+        # self.menu1.append(self.checks[int].objectName())
+        # print(f'menu1 = {self.menu1}')
 
-        name_spin = f'self.spin_{int}'
-        name_spin = QSpinBox(self)
-        name_spin.setGeometry(QtCore.QRect(170, y, 40, 22))
-        name_spin.valueChanged.connect(self.change)
-        name_spin.setObjectName("spinBox")
+        # создаём экземпляр класса QSpinBox
+        self.spins[int] = QSpinBox(self)
+        self.spins[int].setGeometry(QtCore.QRect(170, y, 40, 22))
+        self.spins[int].setObjectName(str(name))
+        self.spins[int].valueChanged.connect(
+            lambda: self.change(name, self.spins[int].value()))
 
-        # self.check_0.setObjectName('Чизбургер')
-        # self.check_0.stateChanged.connect(self.state_changed)
-        # self.check_0.move(20, 110)
-
+        # self.menu2.append(self.spins[int].objectName())
+        # print(f'menu2 = {self.menu2}')
 
 
 if __name__ == '__main__':
