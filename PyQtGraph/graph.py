@@ -2,10 +2,9 @@ from PyQt5 import QtCore
 from pyqtgraph import PlotWidget
 import pyqtgraph as pg
 
-from PyQt5.QtWidgets import QApplication, QWidget, QMainWindow, QGridLayout,\
+from PyQt5.QtWidgets import QApplication, QWidget, QMainWindow, QGridLayout, \
     QPushButton, QLineEdit, QLabel
 import sys
-
 
 operators = {'+': (1, lambda x, y: x + y), '-': (1, lambda x, y: x - y),
              '*': (2, lambda x, y: x * y), '/': (2, lambda x, y: x / y),
@@ -30,7 +29,7 @@ class Ui_Dialog(object):
         self.label.setObjectName("label")
 
         self.label_r = QLabel(Dialog)
-        self.label_r.setGeometry(QtCore.QRect(10, 30, 300, 25))
+        self.label_r.setGeometry(QtCore.QRect(10, 30, 400, 25))
         self.label_r.setObjectName("label")
 
         self.gridLayout = QGridLayout(self.gridLayoutWidget)
@@ -87,7 +86,8 @@ class Ui_Dialog(object):
         self.pushBuild.setText(_translate("Dialog", "Построить"))
         self.label.setText(_translate("Dialog", "Добавить формулу y ="))
         self.label_r.setText(
-            _translate("Dialog", "Формула записывается через пробел"))
+            _translate("Dialog", "В написании формулы для возведения в степень используйте '^', \n"
+                                 "а для нахождения корня 'v'"))
         self.label_2.setText(_translate("Dialog", "Введите диапозон х"))
 
     def parse(self, line):

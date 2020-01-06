@@ -1,6 +1,6 @@
 import sys
 from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QLabel
-from PyQt5.QtWidgets import QSpinBox, QTableWidget, QCheckBox, QPlainTextEdit
+from PyQt5.QtWidgets import QSpinBox, QCheckBox, QPlainTextEdit
 from PyQt5 import QtCore
 
 
@@ -11,14 +11,13 @@ class Example(QWidget):
 
     def initUI(self, Dialog):
         Dialog.resize(640, 300)
-        # Создаем словарь с наименованиями блюд, ценами и количеством в заказе
-        self.menu = {'Чизбургер': [20, 0], 'Гамбургер': [30, 0],
-                     'Картофель Фри': [40, 0], 'Чай': [5, 0],
-                     'Кофе': [10, 0], 'Кока-Кола': [13, 0]}
+        # Создаем словарь с наименованиями блюд, ценами
+        self.menu = {'Чизбургер': 20, 'Гамбургер': 30,
+                     'Картофель Фри': 40, 'Чай': 5,
+                     'Кофе': 10, 'Кока-Кола': 13}
         # Из ключей словаря menu формируем список блюд
         self.menu3 = list(self.menu.keys())
-        self.menu1 = []
-        self.menu2 = []
+
         # Формируем список переменных для создания QCheckBox
         self.checks = ['check' + str(i) for i in range(len(self.menu))]
         # Формируем список переменных для создания  QSpinBox
@@ -41,21 +40,13 @@ class Example(QWidget):
 
         # Создаем элеметы QCheckBox и QSpinBox
         for i in range(len(self.menu)):
-            # print(f' name1 = {list(self.menu.keys())[i]}')
             self.add_element(list(self.menu.keys())[i], i)
 
         self.check_tab = QWidget()
         self.check_tab.setObjectName("check")
 
-        # self.checkWidget = QTableWidget(Dialog)
-        # self.checkWidget.setGeometry(QtCore.QRect(530, 25, 256, 151))
-        # self.checkWidget.setObjectName("checkWidget")
-        # self.checkWidget.setColumnCount(0)
-        # self.checkWidget.setRowCount(0)
-
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
-
         self.show()
 
     def retranslateUi(self, Dialog):
@@ -63,27 +54,11 @@ class Example(QWidget):
         Dialog.setWindowTitle(_translate("Dialog", "Макдоналдс"))
         self.btn.setText(_translate("Dialog", "Заказать"))
         self.label.setText(_translate("Dialog", "Чек:"))
-
         name = self.menu.keys()
-        print(f' name = {list(name)[0]}')
-        print(f' len = {len(self.menu)}')
-        # for i in range(len(self.menu)):
-        #     print(f' name = {list( self.menu.keys())[i]}')
-        #     name = f'self.check_{i}'
-        #     print(type(self.check_0))
-        print(dir(self))
-        # print(f'name {name.setText(_translate("Dialog", list( self.menu.keys())[i]))}')
-        # self.f"self.check_{i}".setText(_translate("Dialog", list( self.menu.keys())[i]))
 
     def change(self, name, value):
-        print(f'name_check = {name}, value = {value}')
-        # self.r = int(self.spin_cheez_burger.text())
-        # # Price
-        # print(f'self.r = {self.r}')
-        # for i in self.menu.keys():
-        #     print(f'i = {i}')
-        # print(f'self.check1.objectName()= {self.checks[0].objectName()}')
-        # dir()
+        pass
+
 
     def check(self):
         self.check.clear()
@@ -95,28 +70,20 @@ class Example(QWidget):
             if button.isChecked():
                 # print(button.isChecked())
                 index = self.menu3.index(button.objectName())
-                stoimost = self.menu[button.objectName()][0]\
+                stoimost = self.menu.get(button.objectName()) \
                            * self.spins[index].value()
                 itogo = itogo + stoimost
+                print_check_name = f'{button.objectName()}'
+                print_cek_sum = f' {self.spins[index].value()}' \
+                                f'- {self.menu.get(button.objectName())}' \
+                                f' - {stoimost}'
+                print_check = print_check_name.ljust(30) + '\t \t' + print_cek_sum
 
-                print(
-                    f'Имя = {button.objectName()} '
-                    f' количество  {self.spins[index].value()}'
-                    f' цена {self.menu[button.objectName()][0]}'
-                    f' стоимость {stoimost}')
-                print_check = f'{button.objectName()} - ' \
-                              f'{self.spins[index].value()} ' \
-                              f'- {self.menu[button.objectName()][0]}' \
-                              f' - {stoimost}'
                 self.check.appendPlainText(print_check)
-        self.check.appendPlainText(str(itogo))
+        self.check.appendPlainText(f'\n \t \t \tИтого: {itogo}'.rjust(20))
 
     def state_changed(self, name):
         index = self.menu3.index(name)
-        print(f'state_changed = {name}')
-        print(f'checks = {self.checks[index].objectName()}')
-        print(f'spins = {self.spins[index].objectName()}')
-        print(f'index = {index}')
 
         if self.checks[index].isChecked():
             # При выборе блюда, количество устанавливаем равным 1.
@@ -125,14 +92,6 @@ class Example(QWidget):
             # При отказе от блюда, количество устанавливаем равным 0.
             self.spins[index].setValue(0)
 
-        # if self.cheez_burger.isChecked():
-        #    self.label.setText("CHECKED!")
-        #    self.spin_cheez_burger.setValue(1)
-        #    # self.spin_cheez_burger.text() == 1
-        #    self.change
-        # else:
-        #    self.spin_cheez_burger.setValue(0)
-        #    self.label.setText("UNCHECKED!")
 
     def add_element(self, name, int):
         _translate = QtCore.QCoreApplication.translate
@@ -144,19 +103,12 @@ class Example(QWidget):
         self.checks[int].move(20, y)
         self.checks[int].setText(_translate("Dialog", str(name)))
 
-        # self.menu1.append(self.checks[int].objectName())
-        # print(f'menu1 = {self.menu1}')
-
         # создаём экземпляр класса QSpinBox
         self.spins[int] = QSpinBox(self)
         self.spins[int].setGeometry(QtCore.QRect(170, y, 40, 22))
         self.spins[int].setObjectName(str(name))
         self.spins[int].valueChanged.connect(
             lambda: self.change(name, self.spins[int].value()))
-
-        # self.menu2.append(self.spins[int].objectName())
-        # print(f'menu2 = {self.menu2}')
-
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
