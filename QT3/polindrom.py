@@ -1,14 +1,14 @@
 def palindrome():
     n = open("input.dat", 'rb')
-    g = ''
-    n.read()
-    for i in n.read():
-        g += str(i)
-        print(g)
-    if g == g[::-1]:
+    g = n.read()
+    ln = len(g) // 2
+    if len(g) == 1:
+        ln = 1
+    elif len(g) == 0:
         return 'True'
-    else:
-        return 'False'
 
-
-palindrome()
+    for i in range(ln):
+        if g[i] != g[-1 - i]:
+            return 'False'
+        else:
+            return 'True'
