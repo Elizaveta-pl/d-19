@@ -6,9 +6,7 @@
 #
 # WARNING! All changes made in this file will be lost!
 
-import sys
-from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QLabel
-from PyQt5.QtWidgets import QFrame, QVBoxLayout, QCheckBox, QPlainTextEdit
+
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
@@ -30,17 +28,34 @@ class Ui_Dialog(object):
         self.lineGrapth.setGeometry(QtCore.QRect(490, 30, 171, 25))
         self.lineGrapth.setObjectName("lineGrapth")
         self.label = QtWidgets.QLabel(Dialog)
-        self.label.setGeometry(QtCore.QRect(290, 30, 201, 20))
+        self.label.setGeometry(QtCore.QRect(10, 10, 201, 20))
         self.label.setObjectName("label")
         self.check = QtWidgets.QPlainTextEdit(Dialog)
         self.check.setGeometry(QtCore.QRect(120, 400, 104, 70))
         self.check.setObjectName("check")
+        self.Gamburger = QtWidgets.QCheckBox(Dialog)
+        self.Gamburger.setGeometry(QtCore.QRect(90, 50, 92, 23))
+        self.Gamburger.setChecked(False)
+        self.Gamburger.setObjectName("Gamburger")
+        self.checkWidget = QtWidgets.QTableWidget(Dialog)
+        self.checkWidget.setGeometry(QtCore.QRect(190, 50, 281, 151))
+        self.checkWidget.setObjectName("checkWidget")
+        self.checkWidget.setColumnCount(0)
+        self.checkWidget.setRowCount(1)
+        item = QtWidgets.QTableWidgetItem()
+        item.setBackground(QtGui.QColor(173, 127, 168))
+        brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
+        brush.setStyle(QtCore.Qt.NoBrush)
+        item.setForeground(brush)
+        self.checkWidget.setVerticalHeaderItem(0, item)
         self.listViewGrapth.raise_()
         self.pushBuild.raise_()
         self.lineGrapth.raise_()
         self.label.raise_()
         self.listWidgetGrapth.raise_()
         self.check.raise_()
+        self.Gamburger.raise_()
+        self.checkWidget.raise_()
 
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
@@ -50,9 +65,16 @@ class Ui_Dialog(object):
         Dialog.setWindowTitle(_translate("Dialog", "Графики"))
         self.pushBuild.setText(_translate("Dialog", "Построить"))
         self.label.setText(_translate("Dialog", "Добавить формулу"))
+        self.Gamburger.setText(_translate("Dialog", "Гамбургер"))
+        item = self.checkWidget.verticalHeaderItem(0)
+        item.setText(_translate("Dialog", "Новая строка"))
 
-if __name__ == '__main__':
-    app = QApplication(sys.argv)
-    ex = Example()
-    ex.show()
-    sys.exit(app.exec())
+
+if __name__ == "__main__":
+    import sys
+    app = QtWidgets.QApplication(sys.argv)
+    Dialog = QtWidgets.QWidget()
+    ui = Ui_Dialog()
+    ui.setupUi(Dialog)
+    Dialog.show()
+    sys.exit(app.exec_())

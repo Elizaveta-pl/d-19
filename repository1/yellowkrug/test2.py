@@ -89,6 +89,7 @@ class Example(QWidget):
         self.y1 += 30
 
     def keyPressEvent1(self):
+        self.drawFlag1(qp)
         self.update()
 
     def keyPressEvent(self, event):

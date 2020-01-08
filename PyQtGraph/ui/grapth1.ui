@@ -62,8 +62,8 @@
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>290</x>
-     <y>30</y>
+     <x>10</x>
+     <y>10</y>
      <width>201</width>
      <height>20</height>
     </rect>
@@ -98,38 +98,36 @@
     <bool>false</bool>
    </property>
   </widget>
-  <widget class="QLabel" name="label_2">
+  <widget class="QTableWidget" name="checkWidget">
    <property name="geometry">
     <rect>
-     <x>10</x>
-     <y>10</y>
-     <width>111</width>
-     <height>21</height>
+     <x>190</x>
+     <y>50</y>
+     <width>281</width>
+     <height>151</height>
     </rect>
    </property>
-   <property name="text">
-    <string>Введите диапозон х</string>
-   </property>
-  </widget>
-  <widget class="QLineEdit" name="lineEdit_xk">
-   <property name="geometry">
-    <rect>
-     <x>150</x>
-     <y>10</y>
-     <width>21</width>
-     <height>20</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QLineEdit" name="lineEdit_xn">
-   <property name="geometry">
-    <rect>
-     <x>120</x>
-     <y>10</y>
-     <width>21</width>
-     <height>20</height>
-    </rect>
-   </property>
+   <row>
+    <property name="text">
+     <string>Новая строка</string>
+    </property>
+    <property name="background">
+     <color>
+      <red>173</red>
+      <green>127</green>
+      <blue>168</blue>
+     </color>
+    </property>
+    <property name="foreground">
+     <brush brushstyle="NoBrush">
+      <color alpha="255">
+       <red>0</red>
+       <green>0</green>
+       <blue>0</blue>
+      </color>
+     </brush>
+    </property>
+   </row>
   </widget>
   <zorder>listViewGrapth</zorder>
   <zorder>pushBuild</zorder>
@@ -138,9 +136,7 @@
   <zorder>listWidgetGrapth</zorder>
   <zorder>check</zorder>
   <zorder>Gamburger</zorder>
-  <zorder>label_2</zorder>
-  <zorder>lineEdit_xk</zorder>
-  <zorder>lineEdit_xn</zorder>
+  <zorder>checkWidget</zorder>
  </widget>
  <resources/>
  <connections/>
