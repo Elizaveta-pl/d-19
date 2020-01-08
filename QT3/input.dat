@@ -1,10 +1,1 @@
-The length of the text can
-be constrained to maxLength().
-The text can be arbitrarily
-constrained using a validator()
-or an inputMask(), or both. When
-switching between a validator
-and an input mask on the same
-line edit, it is best to clear
-the validator or input mask to
-prevent undefined behavior.
+Make Desktop applications with Python Pyqt.PyQt can be challenging to learn,in this course we'll make it easy for you.The course starts with the basics like buttons, labels,signals and slots.Then it dives deeper and teaches you how to use designer,
