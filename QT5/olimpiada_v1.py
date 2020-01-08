@@ -129,9 +129,7 @@ class Ui_Dialog(object):
             for j, elem in enumerate(row):
                 self.checkWidget.setItem(i, j,
                                          QtWidgets.QTableWidgetItem(str(elem)))
-
         self.checkWidget.resizeColumnsToContents()
-        self.checkWidget.sortItems(0, QtCore.Qt.AscendingOrder)
 
 
 if __name__ == "__main__":

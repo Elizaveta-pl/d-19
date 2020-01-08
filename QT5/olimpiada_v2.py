@@ -65,9 +65,17 @@ class Ui_Dialog(object):
         with open('rez.csv', encoding="utf8") as csvfile:
             reader = csv.reader(csvfile, delimiter=',', quotechar='"')
             self.result = []
+            result_new = []
             for row in list(reader)[1:]:
-                row.append(row[2].split('-')[2])
-                row.append(row[2].split('-')[3])
+                row_new = []
+                row_new.append(row[0])
+                row_new.append(f'{row[1].split()[3]} {row[1].split()[4]}')
+                row_new.append(row[2])
+                row_new.append(row[7])
+
+                row_new.append(row[2].split('-')[2])
+                row_new.append(row[2].split('-')[3])
+                result_new.append(row_new)
                 self.result.append(row)
 
             self.login = [row[2].split('-') for row in self.result]
@@ -77,6 +85,8 @@ class Ui_Dialog(object):
             self.shool.append('')
             self.shool = list(set(self.shool))
             self.klass = list(set(self.klass))
+
+            self.result = result_new
 
     def activatedRowColumn(self, r, c):
         pass
@@ -102,12 +112,12 @@ class Ui_Dialog(object):
         if klass == '' and shool == '':
             result = [row for row in self.result]
         elif klass == '':
-            result = [row for row in self.result if row[8] == shool]
+            result = [row for row in self.result if row[4] == shool]
         elif shool == '':
-            result = [row for row in self.result if row[9] == klass]
+            result = [row for row in self.result if row[5] == klass]
         else:
             result = [row for row in self.result if
-                      (row[8] == shool or row[9] == klass)]
+                      (row[4] == shool or row[5] == klass)]
         self.addrow(result)
 
     def del_row(self):
@@ -115,8 +125,9 @@ class Ui_Dialog(object):
             self.checkWidget.removeRow(0)
 
     def search(self):
-        names_title = ['Место', 'Имя участника', 'Логин', 'Задача1',
-                       'Задача2', 'Задача3', 'Задача4', 'Сумма баллов']
+        # names_title = ['Место', 'Имя участника', 'Логин', 'Задача1',
+        #                'Задача2', 'Задача3', 'Задача4', 'Сумма баллов']
+        names_title = ['Место', 'Имя участника', 'Логин', 'Сумма баллов']
         self.checkWidget.setColumnCount(len(names_title))
         self.checkWidget.setHorizontalHeaderLabels(names_title)
 
@@ -127,11 +138,24 @@ class Ui_Dialog(object):
         for i, row in enumerate(result):
             self.checkWidget.setRowCount(self.checkWidget.rowCount() + 1)
             for j, elem in enumerate(row):
-                self.checkWidget.setItem(i, j,
-                                         QtWidgets.QTableWidgetItem(str(elem)))
+                item = QtWidgets.QTableWidgetItem(str(elem))
+                self.checkWidget.setItem(i, j, item)
 
         self.checkWidget.resizeColumnsToContents()
         self.checkWidget.sortItems(0, QtCore.Qt.AscendingOrder)
+        self.checkWidget.colorCount()
+
+        item1 = self.checkWidget.item(0, 0)
+        if item1 != None:
+            if self.checkWidget.rowCount() >= 3:
+                row_color = 3
+            else:
+                row_color = self.checkWidget.rowCount()
+
+            for i in range(row_color):
+                for j in range(self.checkWidget.columnCount()):
+                    self.checkWidget.item(i, j).setBackground(
+                        QtGui.QColor(100, 100, 150))
 
 
 if __name__ == "__main__":
