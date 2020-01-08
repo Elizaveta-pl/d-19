@@ -50,7 +50,7 @@
      <string>Добавить</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_">
+   <widget class="QPushButton" name="pushButton_edit">
     <property name="geometry">
      <rect>
       <x>400</x>
