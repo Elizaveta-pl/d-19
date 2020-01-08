@@ -1,5 +1,4 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
-import collections
 
 stat = {'a': '', 'b': '', 'c': '', 'd': '', 'e': '', 'f': '',
         'g': '', 'h': '', 'i': '', 'j': '', 'k': '', 'l': '',
@@ -22,28 +21,31 @@ class Ui_MainWindow(object):
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.max = QtWidgets.QLabel(self.centralwidget)
-        self.max.setGeometry(QtCore.QRect(10, 50, 275, 40))
+        self.max.setGeometry(QtCore.QRect(10, 50, 201, 31))
         self.max.setObjectName("max")
         self.min = QtWidgets.QLabel(self.centralwidget)
-        self.min.setGeometry(QtCore.QRect(10, 130, 275, 40))
+        self.min.setGeometry(QtCore.QRect(10, 130, 201, 41))
         self.min.setObjectName("min")
         self.lcdNumber_max = QtWidgets.QLCDNumber(self.centralwidget)
-        self.lcdNumber_max.setGeometry(QtCore.QRect(370, 50, 70, 40))
+        self.lcdNumber_max.setGeometry(QtCore.QRect(330, 50, 91, 41))
         self.lcdNumber_max.setObjectName("lcdNumber_max")
         self.lcdNumber_min = QtWidgets.QLCDNumber(self.centralwidget)
-        self.lcdNumber_min.setGeometry(QtCore.QRect(370, 130, 70, 40))
+        self.lcdNumber_min.setGeometry(QtCore.QRect(330, 130, 91, 41))
         self.lcdNumber_min.setObjectName("lcdNumber_min")
-
+        self.textEdit_max = QtWidgets.QTextEdit(self.centralwidget)
+        self.textEdit_max.setGeometry(QtCore.QRect(220, 50, 91, 41))
         font = QtGui.QFont()
         font.setPointSize(18)
         font.setBold(True)
         font.setWeight(75)
-        self.textEdit_max = QtWidgets.QTextEdit(self.centralwidget)
-        self.textEdit_max.setGeometry(QtCore.QRect(290, 50, 70, 40))
         self.textEdit_max.setFont(font)
         self.textEdit_max.setObjectName("textEdit_max")
         self.textEdit_min = QtWidgets.QTextEdit(self.centralwidget)
-        self.textEdit_min.setGeometry(QtCore.QRect(290, 130, 70, 40))
+        self.textEdit_min.setGeometry(QtCore.QRect(220, 130, 91, 41))
+        font = QtGui.QFont()
+        font.setPointSize(18)
+        font.setBold(True)
+        font.setWeight(75)
         self.textEdit_min.setFont(font)
         self.textEdit_min.setObjectName("textEdit_min")
         self.pushButton = QtWidgets.QPushButton(self.centralwidget)
@@ -64,12 +66,9 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(
-            _translate("MainWindow", "Файловая статистика 2"))
-        self.max.setText(
-            _translate("MainWindow", "Самый часто встречающийся символ"))
-        self.min.setText(
-            _translate("MainWindow", "Самый редко встречающийся символ"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "Файловая статистика 2"))
+        self.max.setText(_translate("MainWindow", "Самый часто встречающийся символ"))
+        self.min.setText(_translate("MainWindow", "Самый редко встречающийся символ"))
         self.pushButton.setText(_translate("MainWindow", "Показать"))
 
     def znach(self):
@@ -99,6 +98,29 @@ class Ui_MainWindow(object):
 
         out.close()
 
+        g = list(open('input.txt'))
+        print(g)
+        g_c = []
+        for i in g:
+            print(i)
+            g_c.append(i.split())
+        g.clear()
+        for h in g_c:
+            for j in h:
+                g.append(j.split())
+        h = list(stat.keys())
+        for i in h:
+            stat.update([i, g.count(i)])
+
+        # mi = min(g)
+        # ma = max(g)
+        # sr = int(sum(g) / len(g))
+        # self.Number_min.display(mi)
+        # self.Number_max.display(ma)
+        # self.Number_sred.display(sr)
+        # u = open('output.txt', "w")
+        # u.write(f'{mi} {ma} {sr}')
+        # u.close()
 
 if __name__ == "__main__":
     import sys
