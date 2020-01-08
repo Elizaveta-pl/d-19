@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 stat = {'a': '', 'b': '', 'c': '', 'd': '', 'e': '', 'f': '',
@@ -79,9 +81,13 @@ class Ui_MainWindow(object):
             print(i)
             g_c.append(i.split())
         g.clear()
-        # for h in g_c:
-        #     for j in h:
-        #         g.append(int(j))
+        for h in g_c:
+            for j in h:
+                g.append(j.split())
+        h = list(stat.keys())
+        for i in h:
+            stat.update([i, g.count(i)])
+
         # mi = min(g)
         # ma = max(g)
         # sr = int(sum(g) / len(g))
