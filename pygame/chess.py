@@ -10,12 +10,12 @@ def board(num, size):
     massiv0 = [0 if i % 2 == 0 else 1 for i in range(0, num)]
     massiv1 = [1 if i % 2 == 0 else 0 for i in range(0, num)]
     massiv = [massiv0 if i % 2 == 0 else massiv1 for i in range(0, num)]
-    new_image = Image.new('RGB', (num * size, num * size), new_color)
-    draw = ImageDraw.Draw(new_image)
-    for i in range(num):
-        for j in range(num):
-            if massiv[i][j] == 0:
-                draw.rectangle((j * size, i * size, (j + 1) * size, (i + 1) * size), fill=(0, 0, 0))
+    # new_image = Image.new('RGB', (num * size, num * size), new_color)
+    # draw = ImageDraw.Draw(new_image)
+    # for i in range(num):
+    #     for j in range(num):
+    #         if massiv[i][j] == 0:
+    #             draw.rectangle((j * size, i * size, (j + 1) * size, (i + 1) * size), fill=(0, 0, 0))
 
 
 pygame.init()

@@ -10,18 +10,25 @@ blue = [0, 0, 255]
 
 pygame.init()
 # w = int(input())
-n = int(input())
-w = 350
-# n = 60
-h = 620
+# n = int(input())
+w = 300
+n = 60
+h = 300
+W = 100
+Hue = 0
 
 # Устанавливаем размер
 size = w, h
 
 # Задаем  цвет окна
-color_surface = pygame.Color('yellow')
+color_surface = pygame.Color('black')
 # Задаем  цвет фигур
 color = pygame.Color('orange')
+
+hsv = color.hsva
+print(hsv)
+# увеличиваем параметр Value, который влияет на яркость
+color.hsva = (Hue, hsv[1], hsv[2] - 30, hsv[3])
 
 # Устанавливаем размеры окна
 screen = pygame.display.set_mode(size)
