@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'PyQtGraph/ui/grapth1.ui'
 #
-# Created by: PyQt5 UI code generator 5.13.1
+# Created by: PyQt5 UI code generator 5.13.0
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -28,7 +28,7 @@ class Ui_Dialog(object):
         self.lineGrapth.setGeometry(QtCore.QRect(490, 30, 171, 25))
         self.lineGrapth.setObjectName("lineGrapth")
         self.label = QtWidgets.QLabel(Dialog)
-        self.label.setGeometry(QtCore.QRect(10, 10, 201, 20))
+        self.label.setGeometry(QtCore.QRect(290, 30, 201, 20))
         self.label.setObjectName("label")
         self.check = QtWidgets.QPlainTextEdit(Dialog)
         self.check.setGeometry(QtCore.QRect(120, 400, 104, 70))
@@ -37,17 +37,15 @@ class Ui_Dialog(object):
         self.Gamburger.setGeometry(QtCore.QRect(90, 50, 92, 23))
         self.Gamburger.setChecked(False)
         self.Gamburger.setObjectName("Gamburger")
-        self.checkWidget = QtWidgets.QTableWidget(Dialog)
-        self.checkWidget.setGeometry(QtCore.QRect(190, 50, 281, 151))
-        self.checkWidget.setObjectName("checkWidget")
-        self.checkWidget.setColumnCount(0)
-        self.checkWidget.setRowCount(1)
-        item = QtWidgets.QTableWidgetItem()
-        item.setBackground(QtGui.QColor(173, 127, 168))
-        brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
-        brush.setStyle(QtCore.Qt.NoBrush)
-        item.setForeground(brush)
-        self.checkWidget.setVerticalHeaderItem(0, item)
+        self.label_2 = QtWidgets.QLabel(Dialog)
+        self.label_2.setGeometry(QtCore.QRect(10, 10, 111, 21))
+        self.label_2.setObjectName("label_2")
+        self.lineEdit_xk = QtWidgets.QLineEdit(Dialog)
+        self.lineEdit_xk.setGeometry(QtCore.QRect(150, 10, 21, 20))
+        self.lineEdit_xk.setObjectName("lineEdit_xk")
+        self.lineEdit_xn = QtWidgets.QLineEdit(Dialog)
+        self.lineEdit_xn.setGeometry(QtCore.QRect(120, 10, 21, 20))
+        self.lineEdit_xn.setObjectName("lineEdit_xn")
         self.listViewGrapth.raise_()
         self.pushBuild.raise_()
         self.lineGrapth.raise_()
@@ -55,7 +53,9 @@ class Ui_Dialog(object):
         self.listWidgetGrapth.raise_()
         self.check.raise_()
         self.Gamburger.raise_()
-        self.checkWidget.raise_()
+        self.label_2.raise_()
+        self.lineEdit_xk.raise_()
+        self.lineEdit_xn.raise_()
 
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
@@ -66,15 +66,4 @@ class Ui_Dialog(object):
         self.pushBuild.setText(_translate("Dialog", "Построить"))
         self.label.setText(_translate("Dialog", "Добавить формулу"))
         self.Gamburger.setText(_translate("Dialog", "Гамбургер"))
-        item = self.checkWidget.verticalHeaderItem(0)
-        item.setText(_translate("Dialog", "Новая строка"))
-
-
-if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    Dialog = QtWidgets.QWidget()
-    ui = Ui_Dialog()
-    ui.setupUi(Dialog)
-    Dialog.show()
-    sys.exit(app.exec_())
+        self.label_2.setText(_translate("Dialog", "Введите диапозон х"))

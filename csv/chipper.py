@@ -1,8 +1,8 @@
 import sys
 from PyQt5.QtWidgets import QMainWindow, QApplication, QWidget, QAction, QTableWidget, \
     QTableWidgetItem, QVBoxLayout
-from PyQt5.QtGui import QIcon
-from PyQt5.QtCore import pyqtSlot
+
+from PyQt5 import QtCore, QtGui
 from PyQt5.QtGui import QColor
 import csv, random
 
@@ -58,6 +58,20 @@ class Example(QWidget):
                         self.colorRow(i, QColor(random.randint(0, 255), random.randint(0, 255),
                                                 random.randint(0, 255)))
         self.tableWidget.resizeColumnsToContents()
+        self.tableWidget.sortItems(1, QtCore.Qt.AscendingOrder)
+
+        item1 = self.tableWidget.item(0, 0)
+        if item1 != None:
+            if self.tableWidget.rowCount() >= 3:
+                row_color = 3
+            else:
+                row_color = self.tableWidget.rowCount()
+
+            for i in range(row_color):
+                for j in range(self.tableWidget.columnCount()):
+                    self.tableWidget.item(i, j).setBackground(
+                        QtGui.QColor(random.randint(0, 255), random.randint(0, 255),
+                                                random.randint(0, 255)))
 
     def colorRow(self, row, color):
         # for i in range(self.tableWidget.columnCount()):

@@ -1,0 +1,11 @@
+print('Введите иня текстового файла:')
+n = input()
+text = list(open(n))
+print('Введите то что нужно заменить:')
+s_in = input()
+print('Введите то на что надо заменить:')
+s_out = input()
+g = open('output.txt', "w")
+for i in text:
+    g.write(i.replace(s_in, s_out) + '\n')
+g.close()
