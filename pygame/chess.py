@@ -34,8 +34,9 @@ else:
     color_surface = pygame.Color(255, 255, 255)
     color = pygame.Color(0, 0, 0)
 
-
+# Устанавливаем размеры окна
 screen = pygame.display.set_mode(size)
+# Устанавливаем цвет окна
 screen.fill(color_surface)
 # screen.fill(pygame.Color('red'), (1, 1, 1, 1))
 
